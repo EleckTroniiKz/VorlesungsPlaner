@@ -1,11 +1,13 @@
 package de.digitra.uniplaner.controller;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import de.digitra.uniplaner.domain.Lecture;
 import de.digitra.uniplaner.domain.StudyProgram;
 import de.digitra.uniplaner.exceptions.BadRequestException;
 import de.digitra.uniplaner.exceptions.ResourceNotFoundException;
 import de.digitra.uniplaner.interfaces.ILectureController;
 import de.digitra.uniplaner.service.LectureService;
+import de.digitra.uniplaner.service.LecturerService;
 import de.digitra.uniplaner.service.StudyProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,33 +26,43 @@ import java.util.Optional;
 @RequestMapping("/lectures")
 public class LectureController implements ILectureController{
 
-    @Autowired
+
     private LectureService lectureService;
     private StudyProgramService studyProgramService;
+    LectureController(LectureService _lectureService, StudyProgramService _studyProgramService){
+        lectureService = _lectureService;
+        studyProgramService = _studyProgramService;
+    }
+
 
     @GetMapping
     public String findAll(Model model) {
         model.addAttribute("lectures", lectureService.findAll());
-        System.out.println("3");
         return "lecture-list";
     }
 
     @GetMapping("/create")
     public String createLecture(Model model) {
         model.addAttribute("lecture", new Lecture());
+        model.addAttribute("studyPrograms", studyProgramService.findAll());
         return "create-lecture";
     }
-
+    /**
+     * @CAN hier den Name der bei TH:each in ${test} nehmen Test ist die Klasse
+    @ModelAttribute("test")
+    public List<Test>{
+       return Service.findAll();
+    }
+     */
     @PostMapping
     public String createLecture(@Valid Lecture lecture, Errors errors) {
         if(errors.hasErrors()){
-            System.out.println("1");
             return "create-lecture";
 
         }
         else{
             lectureService.save(lecture);
-            return "lecture-list";
+            return "redirect:/lectures";
         }
     }
 

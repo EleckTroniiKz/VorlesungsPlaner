@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general :: header">
+    <title>Alle Kurse</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+
+<!-- content -->
+<main id="main">
+
+    <section id="space" class="space-section"></section>
+    <section id="space list">
+        <div class="container">
+            <div class="section-title">
+                <h2  style="color: #f2f2f2">Kursdatumsliste</h2>
+                <p>Hier kannst du die Kursdaten einsehen. Man kann das Datum eines Kurses bearbeiten oder auch löschen.</p>
+            </div>
+
+            <div style="margin-bottom: 5px;">
+                <a th:href="@{/lecturedates/create}"><button class="start">Kursdatum hinzufügen</button></a>
+                <!--<a th:href="@{/web/lecturedates/create}" class="btn btn btn-success" role="button">
+                    <i class="fa fa-users" aria-hidden="true"></i> LectureDate hinzufügen</a>-->
+            </div>
+                <div class="table-responsive wishlist-table margin-bottom-none">
+                    <table class="table "  style="color: #f3f3f3">
+                        <thead>
+                            <tr>
+                                <th>Startdatum</th>
+                                <th>Dozent</th>
+                                <th>Enddatum</th>
+                                <th>Kurs</th>
+                                <th>Semester</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="lecturedate : ${lecturedates}">
+                                <td th:text="${lecturedate.endDate}"></td>
+                                <td th:text="${lecturedate.startDate}"></td>
+                                <td th:text="${lecturedate.lecturer}"></td>
+                                <td th:text="${lecturedate.lecture}"></td>
+                                <td th:text="${lecturedate.semester}"></td>
+                                <td>
+                                    <input id="lecturedateid" type="hidden" th:value="${lecturedate.id}" >
+                                    <a th:href="@{/web/lecturedates/edit/{id}(id=${lecturedate.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                                    <form th:action="@{/web/lecturedates/{id}(id=${lecturedate.id})}" th:object="${lecturedate}" th:method="delete" style='display:inline;'>
+                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+            </div>
+
+
+        </div>
+    </section>
+</main>
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+
+</body>
+</html>
+

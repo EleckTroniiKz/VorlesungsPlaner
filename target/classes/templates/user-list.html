@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general :: header">
+    <title>Alle Kurse</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+
+<!-- content -->
+<main id="main">
+
+    <section id="space" class="space-section"></section>
+    <section id="space list">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: #f2f2f2">Alle User</h2>
+                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+                    fugiat sit in iste officiis commodi quidem hic quas.</p>
+            </div>
+
+
+            <div style="margin-bottom: 5px;">
+                <a th:href="@{/users/create}"><button class="start">User hinzufügen</button></a>
+                <!--<a th:href="@{/users/create}" class="btn btn btn-success" role="button">
+                    <i class="fa fa-users" aria-hidden="true"></i> User hinzufügen</a>-->
+            </div>
+
+
+
+
+
+                    <div class="table-responsive wishlist-table margin-bottom-none">
+
+
+
+                        <table class="table "  style="color: #f3f3f3">
+                            <thead>
+                            <tr>
+                                                                                               <th>login</th>
+                                                                   <th>password</th>
+                                                                   <th>firstName</th>
+                                                                   <th>lastName</th>
+                                                                   <th>email</th>
+                                                                   <th>activated</th>
+                                                            
+                            <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${users}">
+
+                                                                     <td th:text="${user.login}"></td>
+                                                                     <td th:text="${user.password}"></td>
+                                                                     <td th:text="${user.firstName}"></td>
+                                                                     <td th:text="${user.lastName}"></td>
+                                                                     <td th:text="${user.email}"></td>
+                                                                     <td th:text="${user.activated}"></td>
+                                                                <td>
+                                    <input id="userid" type="hidden" th:value="${user.id}" >
+                                    <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                                    <form th:action="@{/users/{id}(id=${user.id})}" th:object="${user}" th:method="delete" style='display:inline;'>
+                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+            </div>
+
+
+        </div>
+    </section>
+</main>
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+
+</body>
+</html>
+
