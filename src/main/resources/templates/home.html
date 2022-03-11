@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general :: header">
+    <title>uniplaner</title>
+    <!--<link rel="stylesheet" th:href="@{/css/home.css}">-->
+    <div class="container">
+        <div th:insert="fragments/general :: navigation"></div>
+    </div>
+</head>
+<body>
+    <div class="container">
+        <div th:insert="fragments/general :: navigation"></div>
+    </div>
+    <div class="wrapper" style="margin-top: 4em">
+        <article id="left">
+            <h1>Vorlesungsplaner</h1>
+            <p>
+                Dieses Projekt wurde im Rahmen des Web Engineering Kurses der DHBW-Lörrach, unterrichtet von Prof. Dr. Bimazubute, erstellt.
+            <hr style="margin: 0 1em 0 1em"/>
+            </p>
+            <p>
+                An diesem Projekt haben die Studenten <a class="link" style="text-decoration: none;" href="https://www.linkedin.com/in/ugurtan-can-cetin-b7a3b220b">Ugurtan Can Cetin</a>, Marvin Obert, Marco Kalmbach und Niklas Reinke gearbeitet.
+            </p>
+            <a th:href="lecture-calendar"><button class="start">Starte Projekt</button></a>
+        </article>
+        <aside id="right">
+            <div class="asideInner">
+                <h1 class="imgText">
+                    Der Vorlesungsplaner besitzt alle CRUD-Operationen.
+                    <Label class="slideLabel">CREATE</Label><br/>
+
+                </h1><!--<p id="content" style="font-size: large">Kreieren Sie nach belieben neue Elemente</p>-->
+                <br/>
+                <div class="slideButtons">
+                    <button class="active" onclick="slideButtonsClicked(this)"></button>
+                    <button class="inactive" onclick="slideButtonsClicked(this)"></button>
+                    <button class="inactive" onclick="slideButtonsClicked(this)"></button>
+                    <button class="inactive" onclick="slideButtonsClicked(this)"></button>
+                </div>
+            </div>
+        </aside>
+    </div>
+<script th:src="@{/js/home.js}"></script>
+</body>
+    <div class="container" style="margin-bottom: 1em">
+        <div th:insert="fragments/general :: footer"></div>
+        <div th:replace="fragments/general.html :: jquery"></div>
+        <div th:replace="fragments/general.html :: bootstrap"></div>
+    </div>
+</html>
+
