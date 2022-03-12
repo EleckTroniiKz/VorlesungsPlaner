@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general :: header">
+    <title>Alle Kurse</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+
+<!-- content -->
+<main id="main">
+
+    <section id="space" class="space-section"></section>
+    <section id="space list">
+        <div class="container">
+            <div class="section-title">
+                <h2  style="color: #f2f2f2">Alle Dozenten</h2>
+                <p>Hier kannst du alle Dozenten anzeigen.<br/> Man kann die gespeicherten Daten der Dozenten auch bearbeiten oder einen Dozenten löschen. </p>
+            </div>
+
+
+            <div style="margin-bottom: 5px;">
+                <a th:href="@{/lecturers/create}"><button class="start">Dozenten hinzufügen</button></a>
+                <!--<a th:href="@{/web/lecturers/create}" class="btn btn btn-success" role="button">
+                    <i class="fa fa-users" aria-hidden="true"></i> Lecturer hinzufügen</a>-->
+            </div>
+
+
+
+
+
+                    <div class="table-responsive wishlist-table margin-bottom-none">
+
+
+
+                        <table class="table "  style="color: #f3f3f3">
+                            <thead>
+                            <tr>
+                                                                                               <th>Vorname</th>
+                                                                   <th>Nachname</th>
+                                                                   <th>E-Mail</th>
+                                                                   <th>Kurse</th>
+                                                                   <th>studyProgram</th>
+                                                            
+                            <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="lecturer : ${lecturers}">
+
+                                                                     <td th:text="${lecturer.firstName}"></td>
+                                                                     <td th:text="${lecturer.lastName}"></td>
+                                                                     <td th:text="${lecturer.email}"></td>
+                                                                     <td th:text="${lecturer.lectures}"></td>
+                                                                     <td th:text="${lecturer.studyProgram}"></td>
+                                                                <td>
+                                    <input id="lecturerid" type="hidden" th:value="${lecturer.id}" >
+                                    <a th:href="@{/web/lecturers/edit/{id}(id=${lecturer.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                                    <form th:action="@{/web/lecturers/{id}(id=${lecturer.id})}" th:object="${lecturer}" th:method="delete" style='display:inline;'>
+                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+            </div>
+
+
+        </div>
+    </section>
+</main>
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+
+</body>
+</html>
+

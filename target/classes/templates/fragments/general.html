@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="header">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+    <link href="http://fonts.googleapis.com/css?family=Princess+Sofia" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/aos/aos.css">
+</head>
+
+<body id="top" class="dark">
+<nav th:fragment="navigation" class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #333">
+
+    <div class="container-fluid" style="background-color: #333">
+        <a class="navbar-brand" th:href=@{/home}>Vorlesungsplanerino</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse collapse hide" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/lecture-calendar}">Kalender</a></li>
+
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+                        Listen
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" th:href="@{/lectures/}">Lecture</a>
+                        <a class="dropdown-item" th:href="@{/lecturedates/}">LectureDate</a>
+                        <a class="dropdown-item" th:href="@{/lecturers/}">Lecturer</a>
+                        <a class="dropdown-item" th:href="@{/semesters/}">Semester</a>
+                        <a class="dropdown-item" th:href="@{/studyclass/}">StudyClass</a>
+                        <a class="dropdown-item" th:href="@{/studyprograms/}">StudyProgram</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" th:href="@{/about-us/}">Über uns</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/contact/}">Kontakt</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script th:fragment="jquery" src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script th:fragment="bootstrap" src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+
+<footer th:fragment="footer">
+
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="/css/aos/aos.js"></script>
+    <script>
+
+    AOS.init();
+  </script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
+    <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark" style="background-color: #333">
+        <a class="navbar-brand" href="https://dhbw-loerrach.de/home" target="_blank" >
+            <img src="/images/dhbw-logo.svg" style="height: 25px">
+        </a>
+            <div class="navbar-collapse collapse hide">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/datenschutz}">Datenschutz</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Kontakt</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/impressum}">Impressum</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</footer>
+</body>
+</html>
+
+
+

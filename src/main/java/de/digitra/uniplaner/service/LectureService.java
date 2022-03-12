@@ -32,13 +32,11 @@ public class LectureService implements ILectureService {
     @Override
     public Lecture save(Lecture lecture) {
         logger.debug("Request to save Lecture {}", lecture);
-        System.out.println("Request to save Lecture"+ lecture);
         return lectureRepository.save(lecture);
     }
 
     @Override
     public void delete(Long id) {
-        logger.debug("Request to delete Lecture {}", id);
         lectureRepository.deleteById(id);
     }
 
@@ -56,6 +54,6 @@ public class LectureService implements ILectureService {
 
     @Override
     public Lecture update(Long id, Lecture lecture) {
-        return null;
+        return lectureRepository.save(lecture);
     }
 }
