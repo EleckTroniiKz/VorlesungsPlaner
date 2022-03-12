@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="uniplaner-backend" target="1.8" />
+      <module name="uniplaner-backend" target="10" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

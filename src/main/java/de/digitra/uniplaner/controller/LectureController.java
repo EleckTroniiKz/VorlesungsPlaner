@@ -66,21 +66,28 @@ public class LectureController implements ILectureController{
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<Lecture> lectureToEdit = lectureService.findOne(id);
-        model.addAttribute("lecture", lectureToEdit);
-        return "edit-lecture";
+        if(!lectureToEdit.isPresent()){
+            throw new ResourceNotFoundException("Vorlesung wurde nicht gefunden");
+        } else {
+        model.addAttribute("lecture", lectureToEdit.get());
+        model.addAttribute("studyPrograms", studyProgramService.findAll());
+        return "update-lecture";
+        }
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable Long id, @Valid Lecture lecture, Errors errors) {
         if(errors.hasErrors()){
-            return "edit-lecture";
+            System.out.println("Error");
+            return "redirect:/lectures/edit/"+id;
+
         }
         else{
             lectureService.update(id, lecture);
-            return "recirect:/lectures";
+            return "redirect:/lectures";
         }
     }
 

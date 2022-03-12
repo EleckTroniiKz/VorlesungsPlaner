@@ -42,8 +42,8 @@
                                      <td class="text-primary" th:text="${lecture.studyProgram}"></td>
                                     <td>
                                         <input id="lectureid" type="hidden" th:value="${lecture.id}" >
-                                        <a th:href="@{/web/lectures/edit/{id}(id=${lecture.id})}" class="btn btn-success btn-sm" role="button">Bearbdeiten</a>
-                                        <form th:action="@{/web/lectures/{id}(id=${lecture.id})}" th:object="${lecture}" th:method="delete" style='display:inline;'>
+                                        <a th:href="@{/lectures/edit/{id}(id=${lecture.id})}" class="btn btn-success btn-sm" role="button">Bearbdeiten</a>
+                                        <form th:action="@{/lectures/{id}(id=${lecture.id})}" th:object="${lecture}" th:method="delete" style='display:inline;'>
                                             <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
                                         </form>
                                     </td>
