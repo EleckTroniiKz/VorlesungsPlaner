@@ -5,6 +5,7 @@ import de.digitra.uniplaner.exceptions.BadRequestException;
 import de.digitra.uniplaner.exceptions.DuplicateEmailException;
 import de.digitra.uniplaner.exceptions.ResourceNotFoundException;
 import de.digitra.uniplaner.interfaces.ILecturerController;
+import de.digitra.uniplaner.service.LectureService;
 import de.digitra.uniplaner.service.LecturerService;
 import de.digitra.uniplaner.service.StudyProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,13 @@ import java.util.Optional;
 public class LecturerController implements ILecturerController {
 
     private LecturerService lecturerService;
+    private LectureService lectureService;
     private StudyProgramService studyProgramService;
 
-    LecturerController(LecturerService _lecturerService, StudyProgramService _studyProgramService){
+    LecturerController(LecturerService _lecturerService, StudyProgramService _studyProgramService, LectureService _lectureService){
         lecturerService =  _lecturerService;
         studyProgramService = _studyProgramService;
+        lectureService = _lectureService;
     }
 
 
@@ -45,6 +48,7 @@ public class LecturerController implements ILecturerController {
     public String createLecturer(Model model) {
         model.addAttribute("lecturer", new Lecturer());
         model.addAttribute("studyPrograms", studyProgramService.findAll());
+        model.addAttribute("lectures", lectureService.findAll());
         return "create-lecturer";
     }
 
@@ -54,6 +58,7 @@ public class LecturerController implements ILecturerController {
             return "create-lecturer";
         }
         else{
+            System.out.println(lecturer);
             lecturerService.save(lecturer);
             return "redirect:/lecturer";
         }

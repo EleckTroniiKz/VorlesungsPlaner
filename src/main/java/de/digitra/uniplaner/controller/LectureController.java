@@ -29,9 +29,12 @@ public class LectureController implements ILectureController{
 
     private LectureService lectureService;
     private StudyProgramService studyProgramService;
-    LectureController(LectureService _lectureService, StudyProgramService _studyProgramService){
+    private LecturerService lecturerService;
+    LectureController(LectureService _lectureService, StudyProgramService _studyProgramService, LecturerService _lecturerService){
         lectureService = _lectureService;
         studyProgramService = _studyProgramService;
+        lecturerService = _lecturerService;
+
     }
 
 
@@ -45,6 +48,7 @@ public class LectureController implements ILectureController{
     public String createLecture(Model model) {
         model.addAttribute("lecture", new Lecture());
         model.addAttribute("studyPrograms", studyProgramService.findAll());
+        model.addAttribute("lecturers", lecturerService.findAll());
         return "create-lecture";
     }
     /**
@@ -58,9 +62,9 @@ public class LectureController implements ILectureController{
     public String createLecture(@Valid Lecture lecture, Errors errors) {
         if(errors.hasErrors()){
             return "create-lecture";
-
         }
         else{
+            System.out.println(lecture);
             lectureService.save(lecture);
             return "redirect:/lectures";
         }
