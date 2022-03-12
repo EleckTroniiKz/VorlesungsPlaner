@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general :: header">
+    <title>uniplaner</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <div class="container" style="margin-bottom: 1em">
+        <div th:insert="fragments/general :: navigation"></div>
+    </div>
+</head>
+<body>
+<main id="main">
+    <section id="space" class="space-section"></section>
+    <section id="space list">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: #f2f2f2">Impressum</h2>
+            </div>
+            <hr>
+            Die einzelnen E-Mail Adressen der Studenten, finden Sie auf der <a class="link" id="link" th:href="@{contact}" >Kontaktseite</a>.
+            <hr>
+            <h3>Anschrift</h3> Hätts'ste wohl gerne :D<hr>
+            <h3>Rechtsform</h3> Menschen (größtenteils)<hr>
+            <h3>Telefon</h3> 110<hr>
+            <h3>Fax</h3> Es ist 2022, und wir wissen beide, dass Fax nicht mehr genutzt wird oder nicht genutzt werden sollte.<hr>
+        </div>
+    </section>
+</main>
+</body>
+<div class="container" style="margin-bottom: 1em">
+    <div th:replace="fragments/general.html :: footer"></div>
+    <div th:replace="fragments/general.html :: jquery"></div>
+    <div th:replace="fragments/general.html :: bootstrap"></div>
+</div>
+</html>
+

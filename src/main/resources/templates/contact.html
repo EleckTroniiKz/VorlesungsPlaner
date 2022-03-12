@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general :: header">
+    <title>uniplaner</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <div class="container" style="margin-bottom: 1em">
+        <div th:insert="fragments/general :: navigation"></div>
+    </div>
+</head>
+<body>
+<main id="main">
+    <section id="space" class="space-section"></section>
+    <section id="space list">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: #f2f2f2">Kontaktdaten</h2>
+                <p>Hier finden Sie die E-Mails der Entwickler, die an diesem Projekt mitgewirkt haben.</p>
+            </div>
+            <hr>
+            <h3>Ugurtan Can Cetin</h3>
+            <p>
+                E-Mail: cetinu@dhbw-loerrach.de
+            </p>
+
+            <hr>
+            <h3>Marvin Obert</h3>
+            <p>
+                E-Mail: obertm@dhbw-loerrach.de
+            </p>
+            <hr>
+            <h3>Marco Kalmbach</h3>
+            <p>
+                E-Mail: kalmbachm@dhbw-loerrach.de
+            </p>
+            <hr>
+            <h3>Niklas Reinke</h3>
+            <p>
+                E-Mail: reinken@dhbw-loerrach.de
+            </p>
+
+        </div>
+    </section>
+</main>
+</body>
+<div class="container" style="margin-bottom: 1em">
+    <div th:replace="fragments/general.html :: footer"></div>
+    <div th:replace="fragments/general.html :: jquery"></div>
+    <div th:replace="fragments/general.html :: bootstrap"></div>
+</div>
+</html>
+
