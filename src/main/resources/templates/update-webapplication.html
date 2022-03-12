@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general :: header">
+    <title>WebApplication aktualisieren</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+
+
+
+
+
+<!-- content -->
+<main id="main">
+
+    <section id="space" class="space-section"></section>
+    <section id="login">
+        <div class="container">
+            <div class="section-title">
+                <h2>Geschenkwunsch hinzufügen</h2>
+                <p>Geschenkwunsch hinzufügen.</p>
+            </div>
+            <div>
+
+
+
+
+                               <div class="row">
+                    <div class="col-md-8 col-md-offset-3">
+                        <form th:action="@{/webapplications/{id}(id=${webapplication.id})}" th:object="${webapplication}" th:method="put">
+                            
+
+                                                          <div class="form-group">
+                              <label for="addSecurity">addSecurity</label>
+                                                            <input type="text" id="addSecurity" name="addSecurity" class="form-control" placeholder="addSecurity" th:value="*{addSecurity}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="addLocalization">addLocalization</label>
+                                                            <input type="text" id="addLocalization" name="addLocalization" class="form-control" placeholder="addLocalization" th:value="*{addLocalization}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="inputModel">inputModel</label>
+                                                            <input type="text" id="inputModel" name="inputModel" class="form-control" placeholder="inputModel" th:value="*{inputModel}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="webStyle">webStyle</label>
+                                                            <input type="text" id="webStyle" name="webStyle" class="form-control" placeholder="webStyle" th:value="*{webStyle}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="packageName">packageName</label>
+                                                            <input type="text" id="packageName" name="packageName" class="form-control" placeholder="packageName" th:value="*{packageName}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="applicationName">applicationName</label>
+                                                            <input type="text" id="applicationName" name="applicationName" class="form-control" placeholder="applicationName" th:value="*{applicationName}">
+                                                            </div>
+                            
+                            
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+</main>
+
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general :: header">
+    <title>Lecture aktualisieren</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+
+
+
+
+
+<!-- content -->
+<main id="main">
+
+    <section id="space" class="space-section"></section>
+    <section id="login">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lecture aktualisieren</h2>
+                <p>Lecture aktualisieren</p>
+            </div>
+            <div>
+
+
+
+
+                               <div class="row">
+                    <div class="col-md-8 col-md-offset-3">
+                        <form th:action="@{/web/lectures/{id}(id=${lecture.id})}" th:object="${lecture}" th:method="put">
+                            
+
+                                                          <div class="form-group">
+                              <label for="duration">duration</label>
+                                                            <input type="text" id="duration" name="duration" class="form-control" placeholder="duration" th:value="*{duration}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="lectureName">lectureName</label>
+                                                            <input type="text" id="lectureName" name="lectureName" class="form-control" placeholder="lectureName" th:value="*{lectureName}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="modulName">modulName</label>
+                                                            <input type="text" id="modulName" name="modulName" class="form-control" placeholder="modulName" th:value="*{modulName}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="lecturers">lecturers</label>
+                                                            <input type="text" id="lecturers" name="lecturers" class="form-control" placeholder="lecturers" th:value="*{lecturers}">
+                                                            </div>
+                            
+                                                            <div class="form-group">
+                                    <label  for="studyProgram">studyProgram </label>
+                                    <select class="form-control" id="studyProgram" name="studyProgram" th:field="*{studyProgram.id}" >
+                                        <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}" th:text="${studyProgram}"/>
+                                    </select>
+                                </div>
+                            
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+</main>
+
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+
+</body>
+</html>
+

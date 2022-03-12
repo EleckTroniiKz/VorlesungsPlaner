@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general :: header">
+    <title>User aktualisieren</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+
+
+
+
+
+<!-- content -->
+<main id="main">
+
+    <section id="space" class="space-section"></section>
+    <section id="login">
+        <div class="container">
+            <div class="section-title">
+                <h2>Geschenkwunsch hinzufügen</h2>
+                <p>Geschenkwunsch hinzufügen.</p>
+            </div>
+            <div>
+
+
+
+
+                               <div class="row">
+                    <div class="col-md-8 col-md-offset-3">
+                        <form th:action="@{/users/{id}(id=${user.id})}" th:object="${user}" th:method="put">
+                            
+
+                                                          <div class="form-group">
+                              <label for="firstName">firstName</label>
+                                                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="firstName" th:value="*{firstName}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="lastName">lastName</label>
+                                                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="lastName" th:value="*{lastName}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="password">password</label>
+                                                            <input type="text" id="password" name="password" class="form-control" placeholder="password" th:value="*{password}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="login">login</label>
+                                                            <input type="text" id="login" name="login" class="form-control" placeholder="login" th:value="*{login}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="email">email</label>
+                                                            <input type="text" id="email" name="email" class="form-control" placeholder="email" th:value="*{email}">
+                                                            </div>
+                                                          <div class="form-group">
+                              <label for="activated">activated</label>
+                                                            <input type="text" id="activated" name="activated" class="form-control" placeholder="activated" th:value="*{activated}">
+                                                            </div>
+                            
+                            
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+</main>
+
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+
+</body>
+</html>
+
