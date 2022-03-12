@@ -35,7 +35,7 @@ public class SemesterController implements ISemesterController{
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("semester", semesterService.findAll());
+        model.addAttribute("semesters", semesterService.findAll());
         return "semester-list";
     }
 
