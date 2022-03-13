@@ -36,7 +36,6 @@
                                <input type="text" id="modulName" name="modulName" class="form-control" placeholder="modulName">
                             </div>
                             <div class="form-group">
-<<<<<<< HEAD
                                 <label for="lecturers">lecturers</label>
                                   <select class="form-control" id="lecturers" name="studyProgram" th:field="*{lecturers}" multiple="multiple">
                                         <option th:each="lecturer : ${lecturers}" th:value="${lecturer.id}" th:text="${lecturer}"/>
@@ -46,14 +45,6 @@
                             <div class="form-group">
                                 <label  for="studyProgram">studyProgram </label>
                                     <select class="form-control" id="studyProgram" name="studyProgram" th:field="*{studyProgram.id}">
-=======
-                               <label for="lecturers">lecturers</label>
-                                  <input type="text" id="lecturers" name="lecturers" class="form-control" placeholder="lecturers">
-                            </div>
-                            <div class="form-group">
-                                <label  for="studyProgram">studyProgram </label>
-                                    <select class="form-control" id="studyProgram" name="studyProgram" th:field="*{studyProgram.id}" >
->>>>>>> línksfixéd
                                         <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}" th:text="${studyProgram}"/>
                                     </select>
                                 </div>

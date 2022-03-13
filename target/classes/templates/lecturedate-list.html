@@ -48,13 +48,8 @@
                                 <td th:text="${lecturedate.semester}"></td>
                                 <td>
                                     <input id="lecturedateid" type="hidden" th:value="${lecturedate.id}" >
-<<<<<<< HEAD
-                                    <a th:href="@{/web/lecturedates/edit/{id}(id=${lecturedate.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/web/lecturedates/{id}(id=${lecturedate.id})}" th:object="${lecturedate}" th:method="delete" style='display:inline;'>
-=======
                                     <a th:href="@{/lecturedates/edit/{id}(id=${lecturedate.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
                                     <form th:action="@{/lecturedates/{id}(id=${lecturedate.id})}" th:object="${lecturedate}" th:method="delete" style='display:inline;'>
->>>>>>> línksfixéd
                                         <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
                                     </form>
 

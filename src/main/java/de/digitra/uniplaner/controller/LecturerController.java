@@ -79,7 +79,7 @@ public class LecturerController implements ILecturerController {
         else{
             lecturerService.delete(id);
             lecturerService.save(lecturer);
-            return "redirect:/lecturer";
+            return "redirect:/lecturers";
         }
     }
 
