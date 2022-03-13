@@ -64,7 +64,6 @@ public class LectureController implements ILectureController{
             return "create-lecture";
         }
         else{
-            System.out.println(lecture);
             lectureService.save(lecture);
             return "redirect:/lectures";
         }
@@ -78,6 +77,7 @@ public class LectureController implements ILectureController{
         } else {
         model.addAttribute("lecture", lectureToEdit.get());
         model.addAttribute("studyPrograms", studyProgramService.findAll());
+        model.addAttribute("lecturers", lecturerService.findAll());
         return "update-lecture";
         }
     }

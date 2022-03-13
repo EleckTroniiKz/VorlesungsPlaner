@@ -36,7 +36,7 @@ public class Lecturer implements Serializable {
 
 
     //@ManyToMany(mappedBy = "lecturers")
-    @ManyToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch= FetchType.EAGER)
     @JoinTable(name = "lecture_lecturer",
             inverseJoinColumns= @JoinColumn(name = "lecture_id", referencedColumnName = "id"),
             joinColumns= @JoinColumn(name = "lecturer_id", referencedColumnName = "id"))

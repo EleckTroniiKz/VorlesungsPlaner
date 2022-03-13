@@ -30,7 +30,6 @@ public class LecturerService implements ILecturerService {
         return lecturerRepository.save(lecturer);
     }
 
-
     @Override
     public void delete(Long id) {
         logger.debug("Request to delete Lecturer {}", id);

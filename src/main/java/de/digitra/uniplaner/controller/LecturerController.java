@@ -58,42 +58,47 @@ public class LecturerController implements ILecturerController {
             return "create-lecturer";
         }
         else{
-            System.out.println(lecturer);
             lecturerService.save(lecturer);
-            return "redirect:/lecturer";
+            return "redirect:/lecturers";
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<Lecturer> lecturerToEdit = lecturerService.findOne(id);
-        model.addAttribute("lecturer", lecturerToEdit);
-        return "update-lecturer";
+        if(lecturerToEdit.isPresent()){
+            model.addAttribute("lecturer", lecturerToEdit.get());
+            model.addAttribute("studyPrograms", studyProgramService.findAll());
+            model.addAttribute("lectures", lectureService.findAll());
+            return "update-lecturer";
+        }else{
+            return "redirect:/lecturers";
+        }
+
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid Lecturer lecturer, Errors errors) {
         if(errors.hasErrors()){
-            return "update-lecturer";
+            return "redirect:/lecturers/"+id;
         }
         else{
-            lecturerService.delete(id);
             lecturerService.save(lecturer);
-            return "redirect:/lecturer";
+            return "redirect:/lecturers";
         }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         lecturerService.delete(id);
-        return "redirect:/lecturer";
+        return "redirect:/lecturers";
     }
 
     @GetMapping("/search")
     public String searchLecturers(Model model, @RequestParam(required = false) Optional<Boolean> completed) {
         List<Lecturer> lecturer = lecturerService.findAll();
         model.addAttribute("lecturer", lecturer);
-        return "redirect:/lecturer";
+        return "redirect:/lecturers";
     }
 //----------------------------------------------------------------------------------------------------------------------
     @RequestMapping(value= "/post", method = RequestMethod.POST)
