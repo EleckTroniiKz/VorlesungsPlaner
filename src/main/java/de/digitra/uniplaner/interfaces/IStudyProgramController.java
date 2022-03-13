@@ -44,9 +44,9 @@ public interface IStudyProgramController {
     /**
      * {@code PUT  /studyprograms/:id} : aktualisiert eine existierende Ressource vom Typ StudyProgram.
      *
-     * @param id           Id der Ressource vom Typ StudyProgram, die am Server aktualisiert werden soll.
+     * @param id                  Id der Ressource vom Typ StudyProgram, die am Server aktualisiert werden soll.
      * @param studyprogramDetails Instanz von StudyProgram, die am Server aktualisiert werden soll.
-     *                     Diese Instanz enthält die aktuellen Werte.
+     *                            Diese Instanz enthält die aktuellen Werte.
      * @return Eine {@link ResponseEntity} mit Status Code {@code 200 (OK)} and im Body die aktualisierte Ressource.
      * @throws ResourceNotFoundException wird ausgelöst, falls die Ressource mit der angegebenen Id nicht gefunden werden konnte.
      */

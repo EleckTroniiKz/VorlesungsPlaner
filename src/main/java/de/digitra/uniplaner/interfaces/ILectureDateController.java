@@ -44,9 +44,9 @@ public interface ILectureDateController {
     /**
      * {@code PUT  /lecturedates/:id} : aktualisiert eine existierende Ressource vom Typ LectureDate.
      *
-     * @param id          Id der Ressource vom Typ LectureDate, die am Server aktualisiert werden soll.
+     * @param id                 Id der Ressource vom Typ LectureDate, die am Server aktualisiert werden soll.
      * @param lecturedateDetails Instanz von LectureDate, die am Server aktualisiert werden soll.
-     *                    Diese Instanz enthält die aktuellen Werte.
+     *                           Diese Instanz enthält die aktuellen Werte.
      * @return Eine {@link ResponseEntity} mit Status Code {@code 200 (OK)} and im Body die aktualisierte Ressource.
      * @throws ResourceNotFoundException wird ausgelöst, falls die Ressource mit der angegebenen Id nicht gefunden werden konnte.
      */

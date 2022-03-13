@@ -24,19 +24,19 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/lecture-calendar")
-public class CalendarController{
+public class CalendarController {
 
     LecturerService lecturerService;
     LectureDateService lectureDateService;
 
-    CalendarController(LecturerService _lecturerService, LectureDateService _lectureDateService){
+    CalendarController(LecturerService _lecturerService, LectureDateService _lectureDateService) {
 
         lecturerService = _lecturerService;
         lectureDateService = _lectureDateService;
     }
 
     @GetMapping
-    public String findAll(Model model){
+    public String findAll(Model model) {
         model.addAttribute("calendar", new Calendar());
         LectureDate temp = new LectureDate();
         Lecture dummyLecture = new Lecture();
@@ -50,20 +50,20 @@ public class CalendarController{
     }
 
     @GetMapping("/{id}")
-    public String findLectureByLecturer(@PathVariable Long id, Model model){
+    public String findLectureByLecturer(@PathVariable Long id, Model model) {
         model.addAttribute("lecturedates", lectureDateService.findByLecturerId(id));
         return "lecture-calendar";
     }
 
     @ModelAttribute("lecturers")
-    public List<Lecturer> getLecturers(){
+    public List<Lecturer> getLecturers() {
         List<Lecturer> list = lecturerService.findAll();
         return list;
     }
 
     @GetMapping("/create")
     public String createLectureDate(Model model) {
-        model.addAttribute("lecturers",lecturerService.findAll());
+        model.addAttribute("lecturers", lecturerService.findAll());
         return "lecture-calendar";
     }
 

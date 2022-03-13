@@ -23,9 +23,9 @@ public interface ILecturerController {
      * Sonst wird Status Code {@code 400 (Bad Request)} zurückgeliefert, falls der übergebene Parameter lecturer bereits eine Id hat.
      * Der Status Code {@code 400 (Bad Request)} wird ebenfalls zurückgeliefert, falls der übergebene Parameter lecturer eine E-Mail-Adresse angibt, die bereits in Verwendung ist.
      * Status  {@code 500 (Internal Server Error)} wird zurückgeliefert, falls die Ressource nicht erstellt werden konnte.
-     * @throws BadRequestException wird ausgelöst, falls die im Parameter lecturer übergebene Instanz bereits eine Id hat.
+     * @throws BadRequestException     wird ausgelöst, falls die im Parameter lecturer übergebene Instanz bereits eine Id hat.
      * @throws DuplicateEmailException wird ausgelöst, falls die im Parameter lecturer übergebene Instanz eine E-Mail hat,
-     * die bereits von einem anderen Lecturer im System verwendet wird.
+     *                                 die bereits von einem anderen Lecturer im System verwendet wird.
      */
     @PostMapping
     ResponseEntity<Lecturer> createLecturer(@RequestBody Lecturer lecturer) throws BadRequestException, DuplicateEmailException, URISyntaxException;
@@ -47,9 +47,9 @@ public interface ILecturerController {
     /**
      * {@code PUT  /lecturers/:id} : aktualisiert eine existierende Ressource vom Typ Lecturer.
      *
-     * @param id       Id der Ressource vom Typ Lecturer, die am Server aktualisiert werden soll.
+     * @param id              Id der Ressource vom Typ Lecturer, die am Server aktualisiert werden soll.
      * @param lecturerDetails Instanz von Lecturer, die am Server aktualisiert werden soll.
-     *                 Diese Instanz enthält die aktuellen Werte.
+     *                        Diese Instanz enthält die aktuellen Werte.
      * @return Eine {@link ResponseEntity} mit Status Code {@code 200 (OK)} and im Body die aktualisierte Ressource.
      * @throws ResourceNotFoundException wird ausgelöst, falls die Ressource mit der angegebenen Id nicht gefunden werden konnte.
      */

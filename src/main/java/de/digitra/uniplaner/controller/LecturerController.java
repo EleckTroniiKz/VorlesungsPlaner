@@ -31,10 +31,10 @@ public class LecturerController implements ILecturerController {
     private StudyProgramService studyProgramService;
     private LectureService lectureService;
 
-    LecturerController(LecturerService _lecturerService, StudyProgramService _studyProgramService, LectureService _lectureService){
-        lecturerService =  _lecturerService;
+    LecturerController(LecturerService _lecturerService, StudyProgramService _studyProgramService, LectureService _lectureService) {
+        lecturerService = _lecturerService;
         studyProgramService = _studyProgramService;
-        lectureService=_lectureService;
+        lectureService = _lectureService;
 
     }
 
@@ -55,10 +55,9 @@ public class LecturerController implements ILecturerController {
 
     @PostMapping
     public String createLecturer(@Valid Lecturer lecturer, Errors errors) {
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "redirect:/lecturers/create";
-        }
-        else{
+        } else {
             lecturerService.save(lecturer);
             return "redirect:/lecturers";
         }
@@ -68,12 +67,12 @@ public class LecturerController implements ILecturerController {
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
 
         Optional<Lecturer> lecturerToEdit = lecturerService.findOne(id);
-        if(lecturerToEdit.isPresent()){
+        if (lecturerToEdit.isPresent()) {
             model.addAttribute("lecturer", lecturerToEdit.get());
             model.addAttribute("studyPrograms", studyProgramService.findAll());
             model.addAttribute("lectures", lectureService.findAll());
             return "update-lecturer";
-        }else{
+        } else {
             return "redirect:/lecturers";
         }
 
@@ -81,10 +80,9 @@ public class LecturerController implements ILecturerController {
 
     @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid Lecturer lecturer, Errors errors) {
-        if(errors.hasErrors()){
-            return "redirect:/lecturers/edit/"+id;
-        }
-        else{
+        if (errors.hasErrors()) {
+            return "redirect:/lecturers/edit/" + id;
+        } else {
             lecturerService.save(lecturer);
             return "redirect:/lecturers";
         }
@@ -102,71 +100,69 @@ public class LecturerController implements ILecturerController {
         model.addAttribute("lecturer", lecturer);
         return "redirect:/lecturers";
     }
-//----------------------------------------------------------------------------------------------------------------------
-    @RequestMapping(value= "/post", method = RequestMethod.POST)
+
+    //----------------------------------------------------------------------------------------------------------------------
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Lecturer> createLecturer(Lecturer lecturer) throws BadRequestException, DuplicateEmailException, URISyntaxException {
         Lecturer doz = null;
-        if(lecturerService.findOne(lecturer.getId()).isPresent() || !lecturerService.findByEmail(lecturer.getEmail()).isEmpty()) {
+        if (lecturerService.findOne(lecturer.getId()).isPresent() || !lecturerService.findByEmail(lecturer.getEmail()).isEmpty()) {
             throw new BadRequestException("Lecturer already exists");
         }
-        try{
+        try {
             doz = lecturerService.save(lecturer);
-        } catch(HttpServerErrorException.InternalServerError e){
+        } catch (HttpServerErrorException.InternalServerError e) {
             e.printStackTrace();
             throw new Error("Couldn't save");
         }
         return ResponseEntity.ok(doz);
     }
 
-    @RequestMapping(value="/put/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/put/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Lecturer> updateLecturer(@PathVariable(value = "id") Long id, @Valid Lecturer lecturerDetails) throws ResourceNotFoundException {
         Lecturer lect = null;
-        if(lecturerService.findOne(id).isPresent()) {
+        if (lecturerService.findOne(id).isPresent()) {
             lect = lecturerService.findOne(id).get();
             lecturerService.delete(id);
             return ResponseEntity.ok(lecturerService.save(lecturerDetails));
-        }
-        else{
+        } else {
             return new ResponseEntity<Lecturer>(HttpStatus.OK);
         }
     }
 
-    @RequestMapping(value="/put", method = RequestMethod.PUT)
+    @RequestMapping(value = "/put", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Lecturer> updateLecturer(Lecturer lecturer) throws BadRequestException {
         Lecturer lect = null;
-        if(lecturerService.findOne(lecturer.getId()).isPresent()) {
+        if (lecturerService.findOne(lecturer.getId()).isPresent()) {
             lect = lecturerService.findOne(lecturer.getId()).get();
             lecturerService.delete(lecturer.getId());
             return ResponseEntity.ok(lecturerService.save(lecturer));
-        }
-        else{
+        } else {
             return new ResponseEntity<Lecturer>(HttpStatus.OK);
         }
     }
 
-    @RequestMapping(value="/get", method = RequestMethod.GET)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Lecturer>> getAlllecturers() {
         System.out.println(lecturerService.findAll());
         return ResponseEntity.ok(lecturerService.findAll());
     }
 
-    @RequestMapping(value="/getLecturer", method = RequestMethod.GET)
+    @RequestMapping(value = "/getLecturer", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Lecturer> getLecturer(@PathVariable Long id) throws ResourceNotFoundException {
-        if(lecturerService.findOne(id).isPresent()){
+        if (lecturerService.findOne(id).isPresent()) {
             return ResponseEntity.ok(lecturerService.findOne(id).get());
-        }
-        else {
+        } else {
             new ResourceNotFoundException("No Lecturer with that ID found!");
             return new ResponseEntity<Lecturer>(HttpStatus.OK);
         }
     }
 
-    @RequestMapping(value="/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<Void> deleteLecturer(@PathVariable Long id) {
         if (lecturerService.findOne(id).isPresent()) {

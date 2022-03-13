@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "study_class")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=StudyClass.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = StudyClass.class)
 public class StudyClass implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -122,8 +122,6 @@ public class StudyClass implements Serializable {
     }
 
 
-
-
     public void setStartingYear(long l) {
     }
 
@@ -134,6 +132,7 @@ public class StudyClass implements Serializable {
     public void setStudyProgram(StudyProgram studyProgram) {
         this.studyProgram = studyProgram;
     }
+
     @Override
     public String toString() {
         return "StudyClass{" +

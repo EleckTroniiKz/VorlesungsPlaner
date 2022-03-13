@@ -31,44 +31,42 @@
             </div>
 
 
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>startDate</th>
+                        <th>endDate</th>
+                        <th>lecturer</th>
+                        <th>lecture</th>
+                        <th>semester</th>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lecturedate : ${lecturedates}">
 
+                        <td th:text="${lecturedate.startDate}"></td>
+                        <td th:text="${lecturedate.endDate}"></td>
+                        <td th:text="${lecturedate.lecturer}"></td>
+                        <td th:text="${lecturedate.lecture}"></td>
+                        <td th:text="${lecturedate.semester}"></td>
+                        <td>
+                            <input id="lecturedateid" type="hidden" th:value="${lecturedate.id}">
+                            <a th:href="@{/web/lecturedates/edit/{id}(id=${lecturedate.id})}"
+                               class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                            <form th:action="@{/web/lecturedates/{id}(id=${lecturedate.id})}" th:object="${lecturedate}"
+                                  th:method="delete" style='display:inline;'>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
 
-
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                                                                               <th>startDate</th>
-                                                                   <th>endDate</th>
-                                                                   <th>lecturer</th>
-                                                                   <th>lecture</th>
-                                                                   <th>semester</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="lecturedate : ${lecturedates}">
-
-                                                                     <td th:text="${lecturedate.startDate}"></td>
-                                                                     <td th:text="${lecturedate.endDate}"></td>
-                                                                     <td th:text="${lecturedate.lecturer}"></td>
-                                                                     <td th:text="${lecturedate.lecture}"></td>
-                                                                     <td th:text="${lecturedate.semester}"></td>
-                                                                <td>
-                                    <input id="lecturedateid" type="hidden" th:value="${lecturedate.id}" >
-                                    <a th:href="@{/web/lecturedates/edit/{id}(id=${lecturedate.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/web/lecturedates/{id}(id=${lecturedate.id})}" th:object="${lecturedate}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -80,7 +78,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

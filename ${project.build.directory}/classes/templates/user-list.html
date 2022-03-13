@@ -31,46 +31,44 @@
             </div>
 
 
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>login</th>
+                        <th>password</th>
+                        <th>firstName</th>
+                        <th>lastName</th>
+                        <th>email</th>
+                        <th>activated</th>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}">
 
+                        <td th:text="${user.login}"></td>
+                        <td th:text="${user.password}"></td>
+                        <td th:text="${user.firstName}"></td>
+                        <td th:text="${user.lastName}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.activated}"></td>
+                        <td>
+                            <input id="userid" type="hidden" th:value="${user.id}">
+                            <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-success btn-sm"
+                               role="button">Bearbeiten</a>
+                            <form th:action="@{/users/{id}(id=${user.id})}" th:object="${user}" th:method="delete"
+                                  style='display:inline;'>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
 
-
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                                                                               <th>login</th>
-                                                                   <th>password</th>
-                                                                   <th>firstName</th>
-                                                                   <th>lastName</th>
-                                                                   <th>email</th>
-                                                                   <th>activated</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="user : ${users}">
-
-                                                                     <td th:text="${user.login}"></td>
-                                                                     <td th:text="${user.password}"></td>
-                                                                     <td th:text="${user.firstName}"></td>
-                                                                     <td th:text="${user.lastName}"></td>
-                                                                     <td th:text="${user.email}"></td>
-                                                                     <td th:text="${user.activated}"></td>
-                                                                <td>
-                                    <input id="userid" type="hidden" th:value="${user.id}" >
-                                    <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/users/{id}(id=${user.id})}" th:object="${user}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -82,7 +80,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

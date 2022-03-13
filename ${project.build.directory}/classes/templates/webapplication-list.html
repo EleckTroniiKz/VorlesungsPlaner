@@ -31,46 +31,44 @@
             </div>
 
 
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>applicationName</th>
+                        <th>packageName</th>
+                        <th>addSecurity</th>
+                        <th>addLocalization</th>
+                        <th>inputModel</th>
+                        <th>webStyle</th>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="webapplication : ${webapplications}">
 
+                        <td th:text="${webapplication.applicationName}"></td>
+                        <td th:text="${webapplication.packageName}"></td>
+                        <td th:text="${webapplication.addSecurity}"></td>
+                        <td th:text="${webapplication.addLocalization}"></td>
+                        <td th:text="${webapplication.inputModel}"></td>
+                        <td th:text="${webapplication.webStyle}"></td>
+                        <td>
+                            <input id="webapplicationid" type="hidden" th:value="${webapplication.id}">
+                            <a th:href="@{/webapplications/edit/{id}(id=${webapplication.id})}"
+                               class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                            <form th:action="@{/webapplications/{id}(id=${webapplication.id})}"
+                                  th:object="${webapplication}" th:method="delete" style='display:inline;'>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
 
-
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                                                                               <th>applicationName</th>
-                                                                   <th>packageName</th>
-                                                                   <th>addSecurity</th>
-                                                                   <th>addLocalization</th>
-                                                                   <th>inputModel</th>
-                                                                   <th>webStyle</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="webapplication : ${webapplications}">
-
-                                                                     <td th:text="${webapplication.applicationName}"></td>
-                                                                     <td th:text="${webapplication.packageName}"></td>
-                                                                     <td th:text="${webapplication.addSecurity}"></td>
-                                                                     <td th:text="${webapplication.addLocalization}"></td>
-                                                                     <td th:text="${webapplication.inputModel}"></td>
-                                                                     <td th:text="${webapplication.webStyle}"></td>
-                                                                <td>
-                                    <input id="webapplicationid" type="hidden" th:value="${webapplication.id}" >
-                                    <a th:href="@{/webapplications/edit/{id}(id=${webapplication.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/webapplications/{id}(id=${webapplication.id})}" th:object="${webapplication}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -82,7 +80,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

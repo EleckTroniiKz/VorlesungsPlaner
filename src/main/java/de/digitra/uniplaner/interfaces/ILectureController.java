@@ -44,9 +44,9 @@ public interface ILectureController {
     /**
      * {@code PUT  /lectures/:id} : aktualisiert eine existierende Ressource vom Typ Lecture.
      *
-     * @param id      Id der Ressource vom Typ Lecture, die am Server aktualisiert werden soll.
+     * @param id             Id der Ressource vom Typ Lecture, die am Server aktualisiert werden soll.
      * @param lectureDetails Instanz von Lecture, die am Server aktualisiert werden soll.
-     *                Diese Instanz enthält die aktuellen Werte.
+     *                       Diese Instanz enthält die aktuellen Werte.
      * @return Eine {@link ResponseEntity} mit Status Code {@code 200 (OK)} and im Body die aktualisierte Ressource.
      * @throws ResourceNotFoundException wird ausgelöst, falls die Ressource mit der angegebenen Id nicht gefunden werden konnte.
      */

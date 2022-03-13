@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "lecturer")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id",scope = Lecturer.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Lecturer.class)
 public class Lecturer implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,10 +36,10 @@ public class Lecturer implements Serializable {
 
 
     //@ManyToMany(mappedBy = "lecturers")
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch= FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinTable(name = "lecture_lecturer",
-            inverseJoinColumns= @JoinColumn(name = "lecture_id", referencedColumnName = "id"),
-            joinColumns= @JoinColumn(name = "lecturer_id", referencedColumnName = "id"))
+            inverseJoinColumns = @JoinColumn(name = "lecture_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "lecturer_id", referencedColumnName = "id"))
     private Set<Lecture> lectures = new HashSet<>();
 
 
@@ -145,11 +145,11 @@ public class Lecturer implements Serializable {
     @Override
     public String toString() {
         return "Lecturer{" +
-            "id=" + getId() +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", email='" + getEmail() + "'" +
-            "}";
+                "id=" + getId() +
+                ", firstName='" + getFirstName() + "'" +
+                ", lastName='" + getLastName() + "'" +
+                ", email='" + getEmail() + "'" +
+                "}";
     }
 
     public StudyProgram getStudyProgram() {

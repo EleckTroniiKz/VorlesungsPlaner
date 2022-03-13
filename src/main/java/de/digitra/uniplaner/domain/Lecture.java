@@ -13,7 +13,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "lecture")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id", scope = Lecture.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Lecture.class)
 public class Lecture implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,17 +32,15 @@ public class Lecture implements Serializable {
     private Long duration;
 
 
-
-
     @OneToMany(mappedBy = "lecture")
 
     private Set<LectureDate> lectureDates = new HashSet<>();
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch= FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinTable(name = "lecture_lecturer",
-               joinColumns = @JoinColumn(name = "lecture_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "lecturer_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "lecture_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "lecturer_id", referencedColumnName = "id"))
     private Set<Lecturer> lecturers = new HashSet<>();
 
 
@@ -53,7 +51,6 @@ public class Lecture implements Serializable {
     public void setStudyProgram(StudyProgram studyProgram) {
         this.studyProgram = studyProgram;
     }
-
 
 
     @ManyToOne
@@ -138,7 +135,6 @@ public class Lecture implements Serializable {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -159,11 +155,11 @@ public class Lecture implements Serializable {
     @Override
     public String toString() {
         return "Lecture{" +
-            "id=" + getId() +
-            ", lectureName='" + getLectureName() + "'" +
-            ", modulName='" + getModulName() + "'" +
-            ", duration=" + getDuration() +
-            "}";
+                "id=" + getId() +
+                ", lectureName='" + getLectureName() + "'" +
+                ", modulName='" + getModulName() + "'" +
+                ", duration=" + getDuration() +
+                "}";
     }
 
     public StudyProgram getStudyProgramm() {

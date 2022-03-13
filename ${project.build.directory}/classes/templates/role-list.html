@@ -31,38 +31,36 @@
             </div>
 
 
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>roleName</th>
+                        <th>uniUsers</th>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="role : ${roles}">
 
+                        <td th:text="${role.roleName}"></td>
+                        <td th:text="${role.uniUsers}"></td>
+                        <td>
+                            <input id="roleid" type="hidden" th:value="${role.id}">
+                            <a th:href="@{/roles/edit/{id}(id=${role.id})}" class="btn btn-success btn-sm"
+                               role="button">Bearbeiten</a>
+                            <form th:action="@{/roles/{id}(id=${role.id})}" th:object="${role}" th:method="delete"
+                                  style='display:inline;'>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
 
-
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                                                                               <th>roleName</th>
-                                                                   <th>uniUsers</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="role : ${roles}">
-
-                                                                     <td th:text="${role.roleName}"></td>
-                                                                     <td th:text="${role.uniUsers}"></td>
-                                                                <td>
-                                    <input id="roleid" type="hidden" th:value="${role.id}" >
-                                    <a th:href="@{/roles/edit/{id}(id=${role.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/roles/{id}(id=${role.id})}" th:object="${role}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -74,7 +72,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

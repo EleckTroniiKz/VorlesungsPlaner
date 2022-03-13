@@ -11,10 +11,6 @@
 </div>
 
 
-
-
-
-
 <!-- content -->
 <main id="main">
 
@@ -27,46 +23,48 @@
             </div>
             <div>
 
-                               <div class="row">
+                <div class="row">
                     <div class="col-md-8 col-md-offset-3">
                         <form th:action="@{/web/semesters}" method="post" th:object="${semester}">
 
-                            
 
-                                                         <div class="form-group">
-                               <label for="number">number</label>
-                                                                <input type="text" id="number" name="number" class="form-control" placeholder="number">
-                                                            </div>
-                                                         <div class="form-group">
-                               <label for="endDate">endDate</label>
-                                                                  <input type="date" id="endDate" name="endDate" class="form-control" placeholder="endDate">
+                            <div class="form-group">
+                                <label for="number">number</label>
+                                <input type="text" id="number" name="number" class="form-control" placeholder="number">
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">endDate</label>
+                                <input type="date" id="endDate" name="endDate" class="form-control"
+                                       placeholder="endDate">
 
-                                                            </div>
-                                                         <div class="form-group">
-                               <label for="name">name</label>
-                                                                <input type="text" id="name" name="name" class="form-control" placeholder="name">
-                                                            </div>
-                                                         <div class="form-group">
-                               <label for="startDate">startDate</label>
-                                                                  <input type="date" id="startDate" name="startDate" class="form-control" placeholder="startDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">name</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate">startDate</label>
+                                <input type="date" id="startDate" name="startDate" class="form-control"
+                                       placeholder="startDate">
 
-                                                            </div>
-                            
+                            </div>
 
 
+                            <div class="form-group">
+                                <label for="studyClass">studyClass </label>
+                                <select class="form-control" id="studyClass" name="studyClass"
+                                        th:field="*{studyClass.id}">
+                                    <option th:each="studyClass : ${studyClasss}" th:value="${studyClass.id}"
+                                            th:text="${studyClass}"/>
+                                </select>
+                            </div>
 
-                                                            <div class="form-group">
-                                    <label  for="studyClass">studyClass </label>
-                                    <select class="form-control" id="studyClass" name="studyClass" th:field="*{studyClass.id}" >
-                                        <option th:each="studyClass : ${studyClasss}" th:value="${studyClass.id}" th:text="${studyClass}"/>
-                                    </select>
-                                </div>
-                            
 
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3">
-                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                        <input type="submit" name="create-space" id="create-space"
+                                               class="btn btn-success" value="Speichern">
                                     </div>
                                 </div>
                             </div>
@@ -80,15 +78,12 @@
     </section>
 
 
-
 </main>
-
 
 
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

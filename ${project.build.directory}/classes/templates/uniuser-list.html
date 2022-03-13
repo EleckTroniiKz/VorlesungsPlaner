@@ -31,40 +31,38 @@
             </div>
 
 
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>firstName</th>
+                        <th>lastName</th>
+                        <th>roles</th>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="uniuser : ${uniusers}">
 
+                        <td th:text="${uniuser.firstName}"></td>
+                        <td th:text="${uniuser.lastName}"></td>
+                        <td th:text="${uniuser.roles}"></td>
+                        <td>
+                            <input id="uniuserid" type="hidden" th:value="${uniuser.id}">
+                            <a th:href="@{/uniusers/edit/{id}(id=${uniuser.id})}" class="btn btn-success btn-sm"
+                               role="button">Bearbeiten</a>
+                            <form th:action="@{/uniusers/{id}(id=${uniuser.id})}" th:object="${uniuser}"
+                                  th:method="delete" style='display:inline;'>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
 
-
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                                                                               <th>firstName</th>
-                                                                   <th>lastName</th>
-                                                                   <th>roles</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="uniuser : ${uniusers}">
-
-                                                                     <td th:text="${uniuser.firstName}"></td>
-                                                                     <td th:text="${uniuser.lastName}"></td>
-                                                                     <td th:text="${uniuser.roles}"></td>
-                                                                <td>
-                                    <input id="uniuserid" type="hidden" th:value="${uniuser.id}" >
-                                    <a th:href="@{/uniusers/edit/{id}(id=${uniuser.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/uniusers/{id}(id=${uniuser.id})}" th:object="${uniuser}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -76,7 +74,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "lecture_date")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id",scope = LectureDate.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = LectureDate.class)
 public class LectureDate implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,7 +72,7 @@ public class LectureDate implements Serializable {
         return lecturer;
     }
 
-        public void setLecturer(Lecturer lecturer) {
+    public void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
     }
 
@@ -106,10 +106,10 @@ public class LectureDate implements Serializable {
     @Override
     public String toString() {
         return "LectureDate{" +
-            "id=" + getId() +
-            ", startDate='" + getStartDate() + "'" +
-            ", endDate='" + getEndDate() + "'" +
-            "}";
+                "id=" + getId() +
+                ", startDate='" + getStartDate() + "'" +
+                ", endDate='" + getEndDate() + "'" +
+                "}";
     }
 
     public Semester getSemester() {

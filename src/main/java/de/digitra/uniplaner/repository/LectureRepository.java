@@ -13,5 +13,4 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     //List<Lecture> fetchByLectureId(@Param("lectureId") long lectureId);
 
 
-
 }

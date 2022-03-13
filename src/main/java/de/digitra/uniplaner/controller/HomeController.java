@@ -6,22 +6,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-    @RequestMapping(value={"/home", "/", ""})
-    public String home(){
+    @RequestMapping(value = {"/home", "/", ""})
+    public String home() {
         return "home";
     }
 
     @GetMapping("/about-us")
-    public String aboutUs() { return "about-us";}
+    public String aboutUs() {
+        return "about-us";
+    }
 
     @GetMapping("/impressum")
-    public String impressum() { return "impressum";}
+    public String impressum() {
+        return "impressum";
+    }
 
     @GetMapping("/datenschutz")
-    public String privacy() { return "datenschutz";}
+    public String privacy() {
+        return "datenschutz";
+    }
 
     @GetMapping("/contact")
-    public String contact() { return "contact";}
+    public String contact() {
+        return "contact";
+    }
 
 
 }

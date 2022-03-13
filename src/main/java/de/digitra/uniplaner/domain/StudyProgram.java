@@ -15,7 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "study_program")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id",scope=StudyProgram.class)
+        property = "id", scope = StudyProgram.class)
 public class StudyProgram implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,7 +38,7 @@ public class StudyProgram implements Serializable {
     //@JsonIgnoreProperties(value = "studyProgram")
 
     @OneToMany(mappedBy = "studyProgram", fetch = FetchType.LAZY,
-     cascade = CascadeType.ALL, orphanRemoval = true)
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Lecture> lectures = new HashSet<>();
 
 
@@ -63,11 +63,6 @@ public class StudyProgram implements Serializable {
         lecturer.setStudyProgram(null);
         return this;
     }
-
-
-
-
-
 
 
     public Set<Lecture> getLectures() {
@@ -161,9 +156,9 @@ public class StudyProgram implements Serializable {
     @Override
     public String toString() {
         return "StudyProgram{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", shortName='" + getShortName() + "'" +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", shortName='" + getShortName() + "'" +
+                "}";
     }
 }

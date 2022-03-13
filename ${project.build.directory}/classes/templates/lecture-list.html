@@ -31,44 +31,42 @@
             </div>
 
 
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>lectureName</th>
+                        <th>modulName</th>
+                        <th>duration</th>
+                        <th>lecturers</th>
+                        <th>studyProgram</th>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lecture : ${lectures}">
 
+                        <td th:text="${lecture.lectureName}"></td>
+                        <td th:text="${lecture.modulName}"></td>
+                        <td th:text="${lecture.duration}"></td>
+                        <td th:text="${lecture.lecturers}"></td>
+                        <td th:text="${lecture.studyProgram}"></td>
+                        <td>
+                            <input id="lectureid" type="hidden" th:value="${lecture.id}">
+                            <a th:href="@{/web/lectures/edit/{id}(id=${lecture.id})}" class="btn btn-success btn-sm"
+                               role="button">Bearbeiten</a>
+                            <form th:action="@{/web/lectures/{id}(id=${lecture.id})}" th:object="${lecture}"
+                                  th:method="delete" style='display:inline;'>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
 
-
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                                                                               <th>lectureName</th>
-                                                                   <th>modulName</th>
-                                                                   <th>duration</th>
-                                                                   <th>lecturers</th>
-                                                                   <th>studyProgram</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="lecture : ${lectures}">
-
-                                                                     <td th:text="${lecture.lectureName}"></td>
-                                                                     <td th:text="${lecture.modulName}"></td>
-                                                                     <td th:text="${lecture.duration}"></td>
-                                                                     <td th:text="${lecture.lecturers}"></td>
-                                                                     <td th:text="${lecture.studyProgram}"></td>
-                                                                <td>
-                                    <input id="lectureid" type="hidden" th:value="${lecture.id}" >
-                                    <a th:href="@{/web/lectures/edit/{id}(id=${lecture.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/web/lectures/{id}(id=${lecture.id})}" th:object="${lecture}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -80,7 +78,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

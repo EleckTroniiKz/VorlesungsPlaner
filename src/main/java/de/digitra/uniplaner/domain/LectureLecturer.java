@@ -26,14 +26,13 @@ public class LectureLecturer implements Serializable {
         this.lectureId = id;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public Long getLectureId(){
+    public Long getLectureId() {
         return lectureId;
     }
-
 
 
 }

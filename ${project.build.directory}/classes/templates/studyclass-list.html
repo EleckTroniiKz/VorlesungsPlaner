@@ -31,42 +31,40 @@
             </div>
 
 
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table ">
+                    <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>startDate</th>
+                        <th>endDate</th>
+                        <th>studyProgram</th>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="studyclass : ${studyclasss}">
 
+                        <td th:text="${studyclass.name}"></td>
+                        <td th:text="${studyclass.startDate}"></td>
+                        <td th:text="${studyclass.endDate}"></td>
+                        <td th:text="${studyclass.studyProgram}"></td>
+                        <td>
+                            <input id="studyclassid" type="hidden" th:value="${studyclass.id}">
+                            <a th:href="@{/web/studyclasss/edit/{id}(id=${studyclass.id})}"
+                               class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                            <form th:action="@{/web/studyclasss/{id}(id=${studyclass.id})}" th:object="${studyclass}"
+                                  th:method="delete" style='display:inline;'>
+                                <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
 
-
-                        <table class="table ">
-                            <thead>
-                            <tr>
-                                                                                               <th>name</th>
-                                                                   <th>startDate</th>
-                                                                   <th>endDate</th>
-                                                                   <th>studyProgram</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="studyclass : ${studyclasss}">
-
-                                                                     <td th:text="${studyclass.name}"></td>
-                                                                     <td th:text="${studyclass.startDate}"></td>
-                                                                     <td th:text="${studyclass.endDate}"></td>
-                                                                     <td th:text="${studyclass.studyProgram}"></td>
-                                                                <td>
-                                    <input id="studyclassid" type="hidden" th:value="${studyclass.id}" >
-                                    <a th:href="@{/web/studyclasss/edit/{id}(id=${studyclass.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/web/studyclasss/{id}(id=${studyclass.id})}" th:object="${studyclass}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
-                                    </form>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -78,7 +76,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

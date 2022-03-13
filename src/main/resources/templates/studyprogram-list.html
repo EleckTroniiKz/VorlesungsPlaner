@@ -24,40 +24,44 @@
 
 
             <div style="margin-bottom: 5px;">
-                <a th:href="@{/studyprograms/create}"><button class="start">Studiengang hinzufügen</button></a>
+                <a th:href="@{/studyprograms/create}">
+                    <button class="start">Studiengang hinzufügen</button>
+                </a>
                 <!--<a th:href="@{/web/studyprograms/create}" class="btn btn btn-success" role="button">
                     <i class="fa fa-users" aria-hidden="true"></i> StudyProgram hinzufügen</a>-->
             </div>
 
-                    <div class="table-responsive wishlist-table margin-bottom-none">
+            <div class="table-responsive wishlist-table margin-bottom-none">
 
 
+                <table class="table " style="color: #f3f3f3">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Kürzel</th>
 
-                        <table class="table "  style="color: #f3f3f3">
-                            <thead>
-                            <tr>
-                                                                                               <th>Name</th>
-                                                                   <th>Kürzel</th>
-                                                            
-                            <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="studyprogram : ${studyPrograms}">
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="studyprogram : ${studyPrograms}">
 
-                                                                     <td th:text="${studyprogram.name}"></td>
-                                                                     <td th:text="${studyprogram.shortName}"></td>
-                                                                <td>
-                                    <input id="studyprogramid" type="hidden" th:value="${studyprogram.id}" >
-                                    <a th:href="@{/studyprograms/edit/{id}(id=${studyprogram.id})}" role="button"><button class="btn btn-outline-success" >Bearbeiten</button></a>
-                                    <form th:action="@{/studyprograms/{id}(id=${studyprogram.id})}" th:object="${studyprogram}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-outline-danger">Löschen</button>
-                                    </form>
+                        <td th:text="${studyprogram.name}"></td>
+                        <td th:text="${studyprogram.shortName}"></td>
+                        <td>
+                            <input id="studyprogramid" type="hidden" th:value="${studyprogram.id}">
+                            <a th:href="@{/studyprograms/edit/{id}(id=${studyprogram.id})}" role="button">
+                                <button class="btn btn-outline-success">Bearbeiten</button>
+                            </a>
+                            <form th:action="@{/studyprograms/{id}(id=${studyprogram.id})}" th:object="${studyprogram}"
+                                  th:method="delete" style='display:inline;'>
+                                <button type="submit" class="btn btn-outline-danger">Löschen</button>
+                            </form>
 
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
 
             </div>
@@ -69,7 +73,6 @@
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>

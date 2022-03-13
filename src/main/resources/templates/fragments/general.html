@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css"/>
     <link href="http://fonts.googleapis.com/css?family=Princess+Sofia" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/aos/aos.css">
@@ -19,7 +20,9 @@
 
     <div class="container-fluid" style="background-color: #333">
         <a class="navbar-brand" th:href=@{/home}>Vorlesungsplanerino</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle Navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle Navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -60,10 +63,11 @@
     <script>
 
     AOS.init();
-  </script>
+
+    </script>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 $(document).ready(function(){
   // Add smooth scrolling to all links
   $("a").on('click', function(event) {
@@ -88,18 +92,19 @@ $(document).ready(function(){
     } // End if
   });
 });
-</script>
+
+    </script>
     <nav class="navbar fixed-bottom navbar-expand-lg navbar-dark" style="background-color: #333">
-        <a class="navbar-brand" href="https://dhbw-loerrach.de/home" target="_blank" >
+        <a class="navbar-brand" href="https://dhbw-loerrach.de/home" target="_blank">
             <img src="/images/dhbw-logo.svg" style="height: 25px">
         </a>
-            <div class="navbar-collapse collapse hide">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/datenschutz}">Datenschutz</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Kontakt</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/impressum}">Impressum</a></li>
-                </ul>
-            </div>
+        <div class="navbar-collapse collapse hide">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" th:href="@{/datenschutz}">Datenschutz</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Kontakt</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/impressum}">Impressum</a></li>
+            </ul>
+        </div>
         </div>
     </nav>
 </footer>

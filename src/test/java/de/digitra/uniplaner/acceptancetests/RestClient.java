@@ -19,42 +19,46 @@ public class RestClient {
 
     private final String SERVER_URL = "http://localhost";
     private final String LECTURE_DATE_RESOURCE = "lecturedates";
-    private static final String LECTURER_RESOURCE = "lecturers";;
+    private static final String LECTURER_RESOURCE = "lecturers";
+    ;
 
     private TestRestTemplate restTemplate;
 
     private int port;
 
-    public RestClient(TestRestTemplate restTemplate, int port){
+    public RestClient(TestRestTemplate restTemplate, int port) {
         this.restTemplate = restTemplate;
         this.port = port;
     }
+
     public String lectureDateEndpoint() {
-        return SERVER_URL + ":" + port + "/"+LECTURE_DATE_RESOURCE;
+        return SERVER_URL + ":" + port + "/" + LECTURE_DATE_RESOURCE;
     }
 
     private String getResourceEndpointForId(String resource, Long id) {
         String entityUrl = "";
         if (resource.equals(LECTURE_DATE_RESOURCE)) {
-            entityUrl = lectureDateEndpoint()+"/"+id;
-        }
-        return entityUrl;
-    }
-    private String getResourceEndpoint(String resource) {
-        String entityUrl = "";
-        if (resource.equals(LECTURE_DATE_RESOURCE)) {
-            return SERVER_URL + ":" + port + "/"+LECTURE_DATE_RESOURCE;
-        }
-        if (resource.equals(LECTURER_RESOURCE)) {
-            return SERVER_URL + ":" + port + "/"+LECTURER_RESOURCE;
+            entityUrl = lectureDateEndpoint() + "/" + id;
         }
         return entityUrl;
     }
 
-    public List<LectureDate> getLectureDates(){
-        ResponseEntity<LectureDate[]> lectureDates = restTemplate.getForEntity(lectureDateEndpoint() , LectureDate[].class);
+    private String getResourceEndpoint(String resource) {
+        String entityUrl = "";
+        if (resource.equals(LECTURE_DATE_RESOURCE)) {
+            return SERVER_URL + ":" + port + "/" + LECTURE_DATE_RESOURCE;
+        }
+        if (resource.equals(LECTURER_RESOURCE)) {
+            return SERVER_URL + ":" + port + "/" + LECTURER_RESOURCE;
+        }
+        return entityUrl;
+    }
+
+    public List<LectureDate> getLectureDates() {
+        ResponseEntity<LectureDate[]> lectureDates = restTemplate.getForEntity(lectureDateEndpoint(), LectureDate[].class);
         return Arrays.stream(lectureDates.getBody()).collect(Collectors.toList());
     }
+
     public LectureDate createLectureDate(LectureDate lectureDate) throws JsonProcessingException {
 
         HttpHeaders headers = new HttpHeaders();

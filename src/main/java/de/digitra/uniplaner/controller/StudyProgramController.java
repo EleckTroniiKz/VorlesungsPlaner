@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/studyprograms")
-public class StudyProgramController implements IStudyProgramController{
+public class StudyProgramController implements IStudyProgramController {
     @Autowired
     private StudyProgramService studyProgramService;
 
@@ -38,10 +38,9 @@ public class StudyProgramController implements IStudyProgramController{
 
     @PostMapping
     public String createStudyProgram(@Valid StudyProgram studyProgram, Errors errors) {
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "redirect:/studyprograms/crteate";
-        }
-        else{
+        } else {
             studyProgramService.save(studyProgram);
             return "redirect:/studyprograms";
         }
@@ -51,10 +50,9 @@ public class StudyProgramController implements IStudyProgramController{
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<StudyProgram> studyProgramToEdit = studyProgramService.findOne(id);
 
-        if(!studyProgramToEdit.isPresent()){
+        if (!studyProgramToEdit.isPresent()) {
             throw new ResourceNotFoundException("Program wurde nicht gefunden!");
-        }
-        else {
+        } else {
             model.addAttribute("studyprogram", studyProgramToEdit.get());
             return "update-studyprogram";
         }
@@ -62,10 +60,9 @@ public class StudyProgramController implements IStudyProgramController{
 
     @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid StudyProgram studyProgram, Errors errors) {
-        if(errors.hasErrors()){
-            return "redirect:/studyprograms/edit/"+id;
-        }
-        else{
+        if (errors.hasErrors()) {
+            return "redirect:/studyprograms/edit/" + id;
+        } else {
             studyProgramService.delete(id);
             studyProgramService.save(studyProgram);
             return "redirect:/studyprograms";
@@ -84,15 +81,16 @@ public class StudyProgramController implements IStudyProgramController{
         model.addAttribute("studyprogram", studyProgram);
         return "redirect:/studyprogram";
     }
+
     //_______________________________________________________________________________________________________________
-    @RequestMapping(value="/post", method = RequestMethod.POST)
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<StudyProgram> createStudyProgram(@RequestBody StudyProgram studyprogram) throws BadRequestException, URISyntaxException {
         StudyProgram sProg = null;
-        if(studyprogram.getId() == null) {
+        if (studyprogram.getId() == null) {
             try {
                 sProg = studyProgramService.save(studyprogram);
-            } catch(Error e){
+            } catch (Error e) {
                 e.printStackTrace();
                 throw new BadRequestException("Couldnt Save!");
             }
@@ -101,61 +99,57 @@ public class StudyProgramController implements IStudyProgramController{
         return ResponseEntity.ok(sProg);
     }
 
-    @RequestMapping(value="/updateStudyProgram", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateStudyProgram", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<StudyProgram> updateStudyProgram(StudyProgram studyprogram) throws BadRequestException {
         StudyProgram studyProgram = null;
-        if(studyprogram.getId() != null){
+        if (studyprogram.getId() != null) {
             try {
                 studyProgram = studyProgramService.save(studyprogram);
-            }
-            catch(Error e) {
+            } catch (Error e) {
                 throw new BadRequestException("Couldn't Update StudyClass");
             }
-        }
-        else{
+        } else {
             throw new BadRequestException("ID exists");
         }
         return ResponseEntity.ok(studyProgram);
     }
 
-    @RequestMapping(value="/updateStudyProgramByID", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateStudyProgramByID", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<StudyProgram> updateStudyProgram(Long id, StudyProgram studyprogramDetails) throws ResourceNotFoundException {
         StudyProgram studyProgram = null;
-        if(studyProgramService.findOne(id).isPresent()){
+        if (studyProgramService.findOne(id).isPresent()) {
             try {
                 studyProgram = studyProgramService.save(studyprogramDetails);
-            }
-            catch(Error e) {
+            } catch (Error e) {
                 throw new ResourceNotFoundException("Couldn't Update StudyClass");
             }
-        }
-        else{
+        } else {
             throw new ResourceNotFoundException("ID exists");
         }
         return ResponseEntity.ok(studyProgram);
     }
 
-    @RequestMapping(value="/get", method = RequestMethod.GET)
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<StudyProgram>> getAllstudyprograms() {
         return ResponseEntity.ok(studyProgramService.findAll());
     }
 
-    @RequestMapping(value="/getStudyProgram", method = RequestMethod.POST)
+    @RequestMapping(value = "/getStudyProgram", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<StudyProgram> getStudyProgram(Long id) throws ResourceNotFoundException {
         StudyProgram ls = null;
         try {
             ls = studyProgramService.findOne(id).get();
-        }catch(Error e){
+        } catch (Error e) {
             throw new ResourceNotFoundException("StudyClass not found!");
         }
         return ResponseEntity.ok(ls);
     }
 
-    @RequestMapping(value="/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<Void> deleteStudyProgram(Long id) {
         studyProgramService.delete(id);

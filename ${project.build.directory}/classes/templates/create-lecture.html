@@ -11,10 +11,6 @@
 </div>
 
 
-
-
-
-
 <!-- content -->
 <main id="main">
 
@@ -27,44 +23,48 @@
             </div>
             <div>
 
-                               <div class="row">
+                <div class="row">
                     <div class="col-md-8 col-md-offset-3">
                         <form th:action="@{/web/lectures}" method="post" th:object="${lecture}">
 
-                            
 
-                                                         <div class="form-group">
-                               <label for="duration">duration</label>
-                                                                <input type="text" id="duration" name="duration" class="form-control" placeholder="duration">
-                                                            </div>
-                                                         <div class="form-group">
-                               <label for="lectureName">lectureName</label>
-                                                                <input type="text" id="lectureName" name="lectureName" class="form-control" placeholder="lectureName">
-                                                            </div>
-                                                         <div class="form-group">
-                               <label for="modulName">modulName</label>
-                                                                <input type="text" id="modulName" name="modulName" class="form-control" placeholder="modulName">
-                                                            </div>
-                                                         <div class="form-group">
-                               <label for="lecturers">lecturers</label>
-                                                                <input type="text" id="lecturers" name="lecturers" class="form-control" placeholder="lecturers">
-                                                            </div>
-                            
+                            <div class="form-group">
+                                <label for="duration">duration</label>
+                                <input type="text" id="duration" name="duration" class="form-control"
+                                       placeholder="duration">
+                            </div>
+                            <div class="form-group">
+                                <label for="lectureName">lectureName</label>
+                                <input type="text" id="lectureName" name="lectureName" class="form-control"
+                                       placeholder="lectureName">
+                            </div>
+                            <div class="form-group">
+                                <label for="modulName">modulName</label>
+                                <input type="text" id="modulName" name="modulName" class="form-control"
+                                       placeholder="modulName">
+                            </div>
+                            <div class="form-group">
+                                <label for="lecturers">lecturers</label>
+                                <input type="text" id="lecturers" name="lecturers" class="form-control"
+                                       placeholder="lecturers">
+                            </div>
 
 
+                            <div class="form-group">
+                                <label for="studyProgram">studyProgram </label>
+                                <select class="form-control" id="studyProgram" name="studyProgram"
+                                        th:field="*{studyProgram.id}">
+                                    <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}"
+                                            th:text="${studyProgram}"/>
+                                </select>
+                            </div>
 
-                                                            <div class="form-group">
-                                    <label  for="studyProgram">studyProgram </label>
-                                    <select class="form-control" id="studyProgram" name="studyProgram" th:field="*{studyProgram.id}" >
-                                        <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}" th:text="${studyProgram}"/>
-                                    </select>
-                                </div>
-                            
 
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3">
-                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                        <input type="submit" name="create-space" id="create-space"
+                                               class="btn btn-success" value="Speichern">
                                     </div>
                                 </div>
                             </div>
@@ -78,15 +78,12 @@
     </section>
 
 
-
 </main>
-
 
 
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>
 <div th:replace="fragments/general.html :: bootstrap"></div>
-
 
 
 </body>
