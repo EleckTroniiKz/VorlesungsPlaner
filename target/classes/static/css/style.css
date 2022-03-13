@@ -698,4 +698,44 @@ section {
     }
   }
 
+  /*
+  Errorpage Animation
+  */
+
+div.errAnimation {
+       animation: errora 2s ease 0s infinite normal forwards !important;
+       justify-content: center;
+       width:90%;
+       height:70%;
+       margin-top:20%;
+       margin-bottom:10%;
+
+   }
+
+@keyframes errora {
+  0% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.errSchrift{
+font-size:100px;
+color:red;
+text-align: center;
+}
+
+.errSchrift2{
+font-size:35px;
+color:white;
+text-align: center;
+margin-bottom:200px;
+}
+
+
+
+
 
