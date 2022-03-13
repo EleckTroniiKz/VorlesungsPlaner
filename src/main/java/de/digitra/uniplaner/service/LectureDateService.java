@@ -48,4 +48,7 @@ public class LectureDateService implements ILectureDateService {
         logger.debug("Request to find LectureDate {}", id);
         return lecturedateRepository.findById(id);
     }
+    public List<LectureDate> findByLecturerId(Long id){
+        return lecturedateRepository.findByLecturerId(id);
+    }
 }

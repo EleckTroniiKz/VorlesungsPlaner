@@ -36,28 +36,28 @@
                             
 
                                                           <div class="form-group">
-                              <label for="duration">duration</label>
-                                                            <input type="text" id="duration" name="duration" class="form-control" placeholder="duration" th:value="*{duration}">
+                              <label for="duration">Dauer</label>
+                                                            <input type="text" id="duration" name="duration" class="form-control" placeholder="Dauer" th:value="*{duration}">
                                                             </div>
                                                           <div class="form-group">
-                              <label for="lectureName">lectureName</label>
-                                                            <input type="text" id="lectureName" name="lectureName" class="form-control" placeholder="lectureName" th:value="*{lectureName}">
+                              <label for="lectureName">Vorlesungsname</label>
+                                                            <input type="text" id="lectureName" name="lectureName" class="form-control" placeholder="Vorlesungsname" th:value="*{lectureName}">
                                                             </div>
                                                           <div class="form-group">
-                              <label for="modulName">modulName</label>
-                                                            <input type="text" id="modulName" name="modulName" class="form-control" placeholder="modulName" th:value="*{modulName}">
+                              <label for="modulName">Modulname</label>
+                                                            <input type="text" id="modulName" name="modulName" class="form-control" placeholder="Modulname" th:value="*{modulName}">
                                                             </div>
                                                           <div class="form-group">
-                                                              <label for="lecturers">lecturers</label>
+                                                              <label for="lecturers">Dozenten</label>
                                                               <select class="form-control" id="lecturers" name="lecturers" th:field="*{lecturers}" multiple="multiple">
                                                                   <option th:each="lecturer : ${lecturers}" th:value="${lecturer.id}" th:text="${lecturer}"/>
                                                               </select>
                                                             </div>
                             
                                                             <div class="form-group">
-                                    <label  for="studyProgram">studyProgram </label>
+                                    <label  for="studyProgram">Studiengang </label>
                                     <select class="form-control" id="studyProgram" name="studyProgram" th:field="*{studyProgram.id}" >
-                                        <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}" th:text="${studyProgram}"/>
+                                        <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}" th:text="${studyProgram.shortName}"/>
                                     </select>
                                 </div>
                             
@@ -65,7 +65,9 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3">
-                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                        <a type="submit" name="create-space" id="create-space" >
+                                            <button class="btn btn-outline-success">Speichern</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

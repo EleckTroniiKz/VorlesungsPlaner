@@ -62,7 +62,7 @@ public class LectureDateController implements ILectureDateController{
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<LectureDate> lectureDateToEdit = lectureDateService.findOne(id);
         if(!lectureDateToEdit.isPresent()){

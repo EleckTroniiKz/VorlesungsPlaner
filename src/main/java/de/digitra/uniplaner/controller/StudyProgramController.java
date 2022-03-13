@@ -50,7 +50,7 @@ public class StudyProgramController implements IStudyProgramController{
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<StudyProgram> studyProgramToEdit = studyProgramService.findOne(id);
-        System.out.println("XXXXXXXXXXX");
+
         if(!studyProgramToEdit.isPresent()){
             throw new ResourceNotFoundException("Program wurde nicht gefunden!");
         }

@@ -2,10 +2,7 @@ package de.digitra.uniplaner.service;
 
 
 import de.digitra.uniplaner.domain.Lecture;
-import de.digitra.uniplaner.domain.LectureLecturer;
-import de.digitra.uniplaner.domain.Lecturer;
 import de.digitra.uniplaner.interfaces.ILectureService;
-import de.digitra.uniplaner.repository.LectureLecturerRepository;
 import de.digitra.uniplaner.repository.LectureRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +20,8 @@ public class LectureService implements ILectureService {
 
     private final LectureRepository lectureRepository;
 
-    private final LectureLecturerRepository lectureLecturerRepository;
-
-    public LectureService(LectureRepository lectureRepository, LectureLecturerRepository lectureLecturerRepository) {
+    public LectureService(LectureRepository lectureRepository) {
         this.lectureRepository = lectureRepository;
-        this.lectureLecturerRepository = lectureLecturerRepository;
     }
 
     @Override
@@ -37,16 +31,8 @@ public class LectureService implements ILectureService {
 
     @Override
     public Lecture save(Lecture lecture) {
-        System.out.println(lecture);
         logger.debug("Request to save Lecture {}", lecture);
         return lectureRepository.save(lecture);
-    }
-
-    public LectureLecturer createRef(Lecture lecture, Lecturer lecturer){
-        LectureLecturer lecturerLecturer = new LectureLecturer();
-        lecturerLecturer.setId(lecture.getId());
-        lecturerLecturer.setlectureId(lecturer.getId());
-        return lectureLecturerRepository.save(lecturerLecturer);
     }
 
     @Override

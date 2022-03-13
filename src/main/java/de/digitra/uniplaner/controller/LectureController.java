@@ -34,7 +34,6 @@ public class LectureController implements ILectureController{
         lectureService = _lectureService;
         studyProgramService = _studyProgramService;
         lecturerService = _lecturerService;
-
     }
 
 
@@ -62,6 +61,7 @@ public class LectureController implements ILectureController{
     public String createLecture(@Valid Lecture lecture, Errors errors) {
         if(errors.hasErrors()){
             return "create-lecture";
+
         }
         else{
             lectureService.save(lecture);
@@ -74,7 +74,8 @@ public class LectureController implements ILectureController{
         Optional<Lecture> lectureToEdit = lectureService.findOne(id);
         if(!lectureToEdit.isPresent()){
             throw new ResourceNotFoundException("Vorlesung wurde nicht gefunden");
-        } else {
+        }
+        else {
         model.addAttribute("lecture", lectureToEdit.get());
         model.addAttribute("studyPrograms", studyProgramService.findAll());
         model.addAttribute("lecturers", lecturerService.findAll());
@@ -83,7 +84,7 @@ public class LectureController implements ILectureController{
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Long id, @Valid Lecture lecture, Errors errors) {
+        public String update(@PathVariable Long id, @Valid Lecture lecture, Errors errors) {
         if(errors.hasErrors()){
             System.out.println("Error");
             return "redirect:/lectures/edit/"+id;

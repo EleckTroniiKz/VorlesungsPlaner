@@ -28,13 +28,14 @@ import java.util.Optional;
 public class LecturerController implements ILecturerController {
 
     private LecturerService lecturerService;
-    private LectureService lectureService;
     private StudyProgramService studyProgramService;
+    private LectureService lectureService;
 
     LecturerController(LecturerService _lecturerService, StudyProgramService _studyProgramService, LectureService _lectureService){
         lecturerService =  _lecturerService;
         studyProgramService = _studyProgramService;
-        lectureService = _lectureService;
+        lectureService=_lectureService;
+
     }
 
 
@@ -55,7 +56,7 @@ public class LecturerController implements ILecturerController {
     @PostMapping
     public String createLecturer(@Valid Lecturer lecturer, Errors errors) {
         if(errors.hasErrors()){
-            return "create-lecturer";
+            return "redirect:/lecturers/create";
         }
         else{
             lecturerService.save(lecturer);
@@ -65,6 +66,7 @@ public class LecturerController implements ILecturerController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
+
         Optional<Lecturer> lecturerToEdit = lecturerService.findOne(id);
         if(lecturerToEdit.isPresent()){
             model.addAttribute("lecturer", lecturerToEdit.get());
@@ -80,7 +82,7 @@ public class LecturerController implements ILecturerController {
     @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid Lecturer lecturer, Errors errors) {
         if(errors.hasErrors()){
-            return "redirect:/lecturers/"+id;
+            return "redirect:/lecturers/edit/"+id;
         }
         else{
             lecturerService.save(lecturer);
@@ -148,6 +150,7 @@ public class LecturerController implements ILecturerController {
     @RequestMapping(value="/get", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Lecturer>> getAlllecturers() {
+        System.out.println(lecturerService.findAll());
         return ResponseEntity.ok(lecturerService.findAll());
     }
 
