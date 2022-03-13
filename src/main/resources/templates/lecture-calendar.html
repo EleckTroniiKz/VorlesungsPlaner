@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
+<head th:insert="fragments/general :: header">
     <title>uniplaner</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,7 +10,7 @@
     <div class="container">
         <div th:insert="fragments/general :: navigation"></div>
     </div>
-</head th:insert="fragments/general :: header">
+</head >
 <body>
 <section class="ftco-section">
     <div class="container">
