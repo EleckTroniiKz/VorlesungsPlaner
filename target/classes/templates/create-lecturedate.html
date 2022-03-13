@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/general :: header">
+    <title>LectureDate hinzufügen</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+<!-- content -->
+<main id="main">
+    <section id="space" class="space-section"></section>
+    <section id="login">
+        <div class="container">
+            <div class="section-title">
+                <h2>LectureDate hinzufügen</h2>
+                <p>Entität hinzufügen.</p>
+            </div>
+            <div>
+
+                               <div class="row">
+                    <div class="col-md-8 col-md-offset-3">
+                        <form th:action="@{/lecturedates}" method="post" th:object="${lecturedate}">
+
+                            
+
+                                                         <div class="form-group">
+                                                             <label for="startDate">Start Datum</label>
+                                                             <input type="datetime-local" id="startDate" name="startDate" class="form-control" placeholder="startDate">
+
+                                                            </div>
+                                                         <div class="form-group">
+                                                             <label for="endDate">End Datum</label>
+                                                             <input type="datetime-local" id="endDate" name="endDate" class="form-control" placeholder="endDate">
+                                                            </div>
+                            
+
+
+
+                                                            <div class="form-group">
+                                    <label  for="lecturer">Dozent </label>
+                                    <select class="form-control" id="lecturer" name="lecturer" th:field="*{lecturer.id}" >
+                                        <option th:each="lecturer : ${lecturers}" th:value="${lecturer.id}" th:text="${lecturer.lastName}"/>
+                                    </select>
+                                </div>
+                                                            <div class="form-group">
+                                    <label  for="lecture">Vorlesung </label>
+                                    <select class="form-control" id="lecture" name="lecture" th:field="*{lecture.id}" >
+                                        <option th:each="lecture : ${lectures}" th:value="${lecture.id}" th:text="${lecture.lectureName}"/>
+                                    </select>
+                                </div>
+                                                            <div class="form-group">
+                                    <label  for="semester">Semester </label>
+                                    <select class="form-control" id="semester" name="semester" th:field="*{semester.id}" >
+                                        <option th:each="semester : ${semesters}" th:value="${semester.id}" th:text="${semester.name}"/>
+                                    </select>
+                                </div>
+                            
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <a type="submit" name="create-space" id="create-space" >
+                                            <button class="btn btn-outline-success">Speichern</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+</main>
+
+
+
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+
+</body>
+</html>
+
