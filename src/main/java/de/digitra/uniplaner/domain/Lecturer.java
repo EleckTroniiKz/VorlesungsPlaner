@@ -35,8 +35,11 @@ public class Lecturer implements Serializable {
     private Set<LectureDate> lectureDates = new HashSet<>();
 
 
-    @ManyToMany(mappedBy = "lecturers")
-    //@JsonIgnore
+    //@ManyToMany(mappedBy = "lecturers")
+    @ManyToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER)
+    @JoinTable(name = "lecture_lecturer",
+            inverseJoinColumns= @JoinColumn(name = "lecture_id", referencedColumnName = "id"),
+            joinColumns= @JoinColumn(name = "lecturer_id", referencedColumnName = "id"))
     private Set<Lecture> lectures = new HashSet<>();
 
 
