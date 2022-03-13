@@ -49,14 +49,6 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="lectures">Dozent</label>
-                                <select class="form-control" id="lectures" name="lectures" th:field="*{lectures}"
-                                        multiple="multiple">
-                                    <option th:each="lecture : ${lectures}" th:value="${lecture.id}"
-                                            th:text="${lecture}"/>
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label for="email">email</label>
                                 <input type="text" id="email" name="email" class="form-control" placeholder="email"
                                        th:value="*{email}">
