@@ -48,7 +48,6 @@ public class LectureDateController implements ILectureDateController{
         model.addAttribute("lecturers",lecturerService.findAll());
         model.addAttribute("semesters",semesterService.findAll());
         model.addAttribute("lectures",lectureService.findAll());
-        System.out.println(model);
         return "create-lecturedate";
     }
 
@@ -66,26 +65,35 @@ public class LectureDateController implements ILectureDateController{
     @GetMapping("/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<LectureDate> lectureDateToEdit = lectureDateService.findOne(id);
-        model.addAttribute("lecturedate", lectureDateToEdit);
-        return "update-lecturedate";
+        if(!lectureDateToEdit.isPresent()){
+            throw new ResourceNotFoundException("Vorlesungs Datum wurde nicht gefunden!");
+        }
+        else{
+            model.addAttribute("lecturedate", lectureDateToEdit.get());
+            model.addAttribute("lecturers",lecturerService.findAll());
+            model.addAttribute("semesters",semesterService.findAll());
+            model.addAttribute("lectures",lectureService.findAll());
+            return "update-lecturedate";
+        }
+
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable Long id, @Valid LectureDate lectureDate, Errors errors) {
         if(errors.hasErrors()){
-            return "update-lecturedate";
+            return "redirect:/lecturedates/"+id;
         }
         else{
             lectureDateService.delete(id);
             lectureDateService.save(lectureDate);
-            return "redirect:/lecturedate";
+            return "redirect:/lecturedates";
         }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         lectureDateService.delete(id);
-        return "redirect:/lecturedate";
+        return "redirect:/lecturedates";
     }
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping(value="/getLectureDate", method = RequestMethod.GET)

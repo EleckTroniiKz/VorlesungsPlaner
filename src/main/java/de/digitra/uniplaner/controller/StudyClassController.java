@@ -22,7 +22,7 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/studyclass")
+@RequestMapping("/studyclasss")
 public class StudyClassController implements IStudyClassController{
 
     private StudyClassService studyClassService;
@@ -48,37 +48,43 @@ public class StudyClassController implements IStudyClassController{
     @PostMapping
     public String createStudyClass(@Valid StudyClass studyClass, Errors errors) {
         if(errors.hasErrors()){
-            return "create-studyclass";
+            return "redirect:/studyclasss/create";
         }
         else{
             studyClassService.save(studyClass);
-            return "redirect:/studyclass";
+            return "redirect:/studyclasss";
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<StudyClass> studyClassToEdit = studyClassService.findOne(id);
-        model.addAttribute("studyclass", studyClassToEdit);
-        return "update-studyclass";
+        if(!studyClassToEdit.isPresent()){
+            throw new ResourceNotFoundException("Klasse wurde nicht gefunden!");
+        }
+        else {
+            model.addAttribute("studyclass", studyClassToEdit.get());
+            model.addAttribute("studyPrograms", studyProgramService.findAll());
+            return "update-studyclass";
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid StudyClass studyClass, Errors errors) {
         if(errors.hasErrors()){
-            return "update-studyclass";
+            return "redirect:/studyclasss/edit/"+id;
         }
         else{
             studyClassService.delete(id);
             studyClassService.save(studyClass);
-            return "redirect:/studyclass";
+            return "redirect:/studyclasss";
         }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         studyClassService.delete(id);
-        return "redirect:/studyclass";
+        return "redirect:/studyclasss";
     }
 
     @GetMapping("/search")

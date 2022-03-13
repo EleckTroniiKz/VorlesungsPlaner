@@ -51,8 +51,8 @@
                                                                      <td th:text="${studyprogram.shortName}"></td>
                                                                 <td>
                                     <input id="studyprogramid" type="hidden" th:value="${studyprogram.id}" >
-                                    <a th:href="@{/web/studyprograms/edit/{id}(id=${studyprogram.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
-                                    <form th:action="@{/web/studyprograms/{id}(id=${studyprogram.id})}" th:object="${studyprogram}" th:method="delete" style='display:inline;'>
+                                    <a th:href="@{/studyprograms/edit/{id}(id=${studyprogram.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                                    <form th:action="@{/studyprograms/{id}(id=${studyprogram.id})}" th:object="${studyprogram}" th:method="delete" style='display:inline;'>
                                         <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
                                     </form>
 

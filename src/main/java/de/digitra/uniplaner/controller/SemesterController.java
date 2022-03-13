@@ -53,22 +53,29 @@ public class SemesterController implements ISemesterController{
     public String createSemester(@Valid Semester semester, Errors errors) {
         if(errors.hasErrors()){
             System.out.println(errors);
-            return "create-semester";
+            return "redirect:/semesters/create";
         }
         else{
             semesterService.save(semester);
-            return "redirect:/semester";
+            return "redirect:/semesters";
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<Semester> semesterToEdit = semesterService.findOne(id);
-        model.addAttribute("semester", semesterToEdit);
-        return "update-semester";
+        if(!semesterToEdit.isPresent()){
+            throw new ResourceNotFoundException("Semester wurde nicht gefunden!");
+        }
+        else {
+            model.addAttribute("semester", semesterToEdit.get());
+            model.addAttribute("studyClasss", studyClassService.findAll());
+            return "update-semester";
+        }
     }
 
-    @PutMapping("/{id}")
+
+    @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid Semester semester, Errors errors) {
         if(errors.hasErrors()){
             return "update-semester";
@@ -76,21 +83,21 @@ public class SemesterController implements ISemesterController{
         else{
             semesterService.delete(id);
             semesterService.save(semester);
-            return "redirect:/semester";
+            return "redirect:/semesters";
         }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         semesterService.delete(id);
-        return "redirect:/semester";
+        return "redirect:/semesters ";
     }
 
     @GetMapping("/search")
     public String searchSemester(Model model, @RequestParam(required = false) Optional<Boolean> completed) {
         List<Semester> semester = semesterService.findAll();
         model.addAttribute("semester", semester);
-        return "redirect:/semester";
+        return "redirect:/semesters";
     }
     //------------------------------------------------------------------------------------------------------------------
     @RequestMapping(value="/post", method = RequestMethod.POST)

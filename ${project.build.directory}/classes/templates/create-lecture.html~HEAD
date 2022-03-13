@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:insert="fragments/general :: header">
-    <title>Lecturer aktualisieren</title>
+    <title>Lecture hinzufügen</title>
 </head>
 <body>
 
@@ -22,40 +22,37 @@
     <section id="login">
         <div class="container">
             <div class="section-title">
-                <h2>Lecturer aktualisieren</h2>
-                <p>Lecturer aktualisieren</p>
+                <h2>Lecture hinzufügen</h2>
+                <p>Entität hinzufügen.</p>
             </div>
             <div>
 
-
-
-
                                <div class="row">
                     <div class="col-md-8 col-md-offset-3">
-<<<<<<< HEAD
-                        <form th:action="@{/web/lecturers/{id}(id=${lecturer.id})}" th:object="${lecturer}" th:method="put">
-=======
-                        <form th:action="@{/lecturers/edit/{id}(id=${lecturer.id})}" th:object="${lecturer}" th:method="put">
->>>>>>> línksfixéd
+                        <form th:action="@{/web/lectures}" method="post" th:object="${lecture}">
+
                             
 
-                                                          <div class="form-group">
-                              <label for="firstName">firstName</label>
-                                                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="firstName" th:value="*{firstName}">
+                                                         <div class="form-group">
+                               <label for="duration">duration</label>
+                                                                <input type="text" id="duration" name="duration" class="form-control" placeholder="duration">
                                                             </div>
-                                                          <div class="form-group">
-                              <label for="lastName">lastName</label>
-                                                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="lastName" th:value="*{lastName}">
+                                                         <div class="form-group">
+                               <label for="lectureName">lectureName</label>
+                                                                <input type="text" id="lectureName" name="lectureName" class="form-control" placeholder="lectureName">
                                                             </div>
-                                                          <div class="form-group">
-                              <label for="lectures">lectures</label>
-                                                            <input type="text" id="lectures" name="lectures" class="form-control" placeholder="lectures" th:value="*{lectures}">
+                                                         <div class="form-group">
+                               <label for="modulName">modulName</label>
+                                                                <input type="text" id="modulName" name="modulName" class="form-control" placeholder="modulName">
                                                             </div>
-                                                          <div class="form-group">
-                              <label for="email">email</label>
-                                                            <input type="text" id="email" name="email" class="form-control" placeholder="email" th:value="*{email}">
+                                                         <div class="form-group">
+                               <label for="lecturers">lecturers</label>
+                                                                <input type="text" id="lecturers" name="lecturers" class="form-control" placeholder="lecturers">
                                                             </div>
                             
+
+
+
                                                             <div class="form-group">
                                     <label  for="studyProgram">studyProgram </label>
                                     <select class="form-control" id="studyProgram" name="studyProgram" th:field="*{studyProgram.id}" >
@@ -83,6 +80,8 @@
 
 
 </main>
+
+
 
 <div th:replace="fragments/general.html :: footer"></div>
 <div th:replace="fragments/general.html :: jquery"></div>

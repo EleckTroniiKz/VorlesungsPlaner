@@ -29,10 +29,10 @@ public class Semester implements Serializable {
     private LocalDate startDate;
 
     @Column(name = "end_date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
 
     @Column(name = "semester_number")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Long number;
 
     @Column(name = "name")

@@ -39,7 +39,7 @@ public class StudyProgramController implements IStudyProgramController{
     @PostMapping
     public String createStudyProgram(@Valid StudyProgram studyProgram, Errors errors) {
         if(errors.hasErrors()){
-            return "create-studyprogram";
+            return "redirect:/studyprograms/crteate";
         }
         else{
             studyProgramService.save(studyProgram);
@@ -47,29 +47,35 @@ public class StudyProgramController implements IStudyProgramController{
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
         Optional<StudyProgram> studyProgramToEdit = studyProgramService.findOne(id);
-        model.addAttribute("studyprogram", studyProgramToEdit);
-        return "update-studyprogram";
+        System.out.println("XXXXXXXXXXX");
+        if(!studyProgramToEdit.isPresent()){
+            throw new ResourceNotFoundException("Program wurde nicht gefunden!");
+        }
+        else {
+            model.addAttribute("studyprogram", studyProgramToEdit.get());
+            return "update-studyprogram";
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid StudyProgram studyProgram, Errors errors) {
         if(errors.hasErrors()){
-            return "update-studyprogram";
+            return "redirect:/studyprograms/edit/"+id;
         }
         else{
             studyProgramService.delete(id);
             studyProgramService.save(studyProgram);
-            return "redirect:/studyprogram";
+            return "redirect:/studyprograms";
         }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         studyProgramService.delete(id);
-        return "redirect:/studyprogram";
+        return "redirect:/studyprograms";
     }
 
     @GetMapping("/search")
