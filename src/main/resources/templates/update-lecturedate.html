@@ -33,33 +33,33 @@
                                <div class="row">
                     <div class="col-md-8 col-md-offset-3">
                         <form th:action="@{/lecturedates/{id}(id=${lecturedate.id})}" th:object="${lecturedate}" th:method="put">
-                            
 
+                            <div class="form-group">
+                                <label for="startDate">Startdatum</label>
+                                <input type="datetime-local" id="startDate" name="startDate" class="form-control" placeholder="Startdatum" th:value="*{startDate}">
+                            </div>
                                                           <div class="form-group">
-                              <label for="endDate">endDate</label>
-                                                            <input type="datetime-local" id="endDate" name="endDate" class="form-control" placeholder="endDate" th:value="*{endDate}">
+                              <label for="endDate">Enddatum</label>
+                                                            <input type="datetime-local" id="endDate" name="Enddatum" class="form-control" placeholder="endDate" th:value="*{endDate}">
                                                             </div>
-                                                          <div class="form-group">
-                              <label for="startDate">startDate</label>
-                                                            <input type="datetime-local" id="startDate" name="startDate" class="form-control" placeholder="startDate" th:value="*{startDate}">
-                                                            </div>
+
                             
                                                             <div class="form-group">
-                                    <label  for="lecturer">lecturer </label>
+                                    <label  for="lecturer">Dozenten </label>
                                     <select class="form-control" id="lecturer" name="lecturer" th:field="*{lecturer.id}" >
-                                        <option th:each="lecturer : ${lecturers}" th:value="${lecturer.id}" th:text="${lecturer}"/>
+                                        <option th:each="lecturer : ${lecturers}" th:value="${lecturer.id}" th:text="${lecturer.lastName}"/>
                                     </select>
                                 </div>
                                                             <div class="form-group">
-                                    <label  for="lecture">lecture </label>
+                                    <label  for="lecture">Vorlesung </label>
                                     <select class="form-control" id="lecture" name="lecture" th:field="*{lecture.id}" >
-                                        <option th:each="lecture : ${lectures}" th:value="${lecture.id}" th:text="${lecture}"/>
+                                        <option th:each="lecture : ${lectures}" th:value="${lecture.id}" th:text="${lecture.lectureName}"/>
                                     </select>
                                 </div>
                                                             <div class="form-group">
-                                    <label  for="semester">semester </label>
+                                    <label  for="semester">Semester </label>
                                     <select class="form-control" id="semester" name="semester" th:field="*{semester.id}" >
-                                        <option th:each="semester : ${semesters}" th:value="${semester.id}" th:text="${semester}"/>
+                                        <option th:each="semester : ${semesters}" th:value="${semester.id}" th:text="${semester.name}"/>
                                     </select>
                                 </div>
                             
@@ -67,7 +67,9 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3">
-                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                        <a type="submit" name="create-space" id="create-space" >
+                                            <button class="btn btn-outline-success">Speichern</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

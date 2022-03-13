@@ -44,7 +44,7 @@
                                                                    <th>Nachname</th>
                                                                    <th>E-Mail</th>
                                                                    <th>Kurse</th>
-                                                                   <th>studyProgram</th>
+                                                                   <th>Study Program</th>
                                                             
                             <th></th>
                             </tr>
@@ -56,12 +56,12 @@
                                                                      <td th:text="${lecturer.lastName}"></td>
                                                                      <td th:text="${lecturer.email}"></td>
                                                                      <td th:text="${lecturer.lectures}"></td>
-                                                                     <td th:text="${lecturer.studyProgram}"></td>
+                                                                     <td th:text="${lecturer.studyProgram.name}"></td>
                                                                 <td>
                                     <input id="lecturerid" type="hidden" th:value="${lecturer.id}" >
-                                    <a th:href="@{/lecturers/edit/{id}(id=${lecturer.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                                    <a th:href="@{/lecturers/edit/{id}(id=${lecturer.id})}" class="btn btn-outline-success" role="button">Bearbeiten</a>
                                     <form th:action="@{/lecturers/{id}(id=${lecturer.id})}" th:object="${lecturer}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                                        <button type="submit" class="btn btn-outline-danger">Löschen</button>
                                     </form>
 
                                 </td>

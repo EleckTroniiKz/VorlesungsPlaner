@@ -71,6 +71,12 @@ article h1 {
   font-size: 110px;
 }
 
+@media only screen and (max-width: 600px) {
+    article h1 {
+      font-size: 50px;
+    }
+}
+
 article p{
   font-size: xx-large;
   margin: 1em

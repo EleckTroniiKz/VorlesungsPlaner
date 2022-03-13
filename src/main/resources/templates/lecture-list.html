@@ -36,15 +36,15 @@
                             <tbody>
                                 <tr th:each="lecture : ${lectures}">
                                      <td th:text="${lecture.lectureName}"></td>
-                                     <td class="text-primary" th:text="${lecture.modulName}"></td>
-                                     <td class="text-primary" th:text="${lecture.duration}"></td>
-                                     <td class="text-primary" th:text="${lecture.lecturers}"></td>
-                                     <td class="text-primary" th:text="${lecture.studyProgram}"></td>
+                                     <td th:text="${lecture.modulName}"></td>
+                                     <td th:text="${lecture.duration}"></td>
+                                     <td th:text="${lecture.lecturers}"></td>
+                                     <td th:text="${lecture.studyProgram.shortName}"></td>
                                     <td>
                                         <input id="lectureid" type="hidden" th:value="${lecture.id}" >
-                                        <a th:href="@{/lectures/edit/{id}(id=${lecture.id})}" class="btn btn-success btn-sm" role="button">Bearbdeiten</a>
+                                        <a th:href="@{/lectures/edit/{id}(id=${lecture.id})}" class="btn btn-outline-success" role="button">Bearbeiten</a>
                                         <form th:action="@{/lectures/{id}(id=${lecture.id})}" th:object="${lecture}" th:method="delete" style='display:inline;'>
-                                            <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                                            <button type="submit" class="btn btn-outline-danger">Löschen</button>
                                         </form>
                                     </td>
                                 </tr>

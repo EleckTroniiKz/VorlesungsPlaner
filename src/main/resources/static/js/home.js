@@ -35,31 +35,3 @@ function showFourthSlide(){
     slideLabel.innerText = "DELETE"
     //paragraphCar.innerText = "Sie brauchen ein Element nicht mehr? Dann löschen Sie es!"
 }
-
-function slideButtonsClicked(btn) {
-
-    if(btn.className !== "active"){
-        for(let i = 0; i < slideButtonList.length; i++){
-            if(btn === slideButtonList[i]){
-                btn.className = "active"
-                switch(i){
-                    case 0:
-                        showFirstSlide()
-                        break;
-                    case 1:
-                        showSecondSlide()
-                        break;
-                    case 2:
-                        showThirdSlide()
-                        break;
-                    case 3:
-                        showFourthSlide()
-                        break;
-                }
-            }
-            else{
-                slideButtonList[i].className = "inactive"
-            }
-        }
-    }
-}

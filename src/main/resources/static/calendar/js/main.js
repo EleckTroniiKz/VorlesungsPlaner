@@ -1,22 +1,47 @@
+
+let selection = document.getElementById("lecturer");
+const a = "HELLO FUCKING WORLD";
+
+// Given data for events in JSON format
+
+var event_data = {
+    "events": [
+    ]
+};
+
+const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+];
+
 (function($) {
 
 	"use strict";
 
 	// Setup the calendar with the current date
-$(document).ready(function(){
+    $(document).ready(function(){
     var date = new Date();
     var today = date.getDate();
     // Set click handlers for DOM elements
     $(".right-button").click({date: date}, next_year);
     $(".left-button").click({date: date}, prev_year);
     $(".month").click({date: date}, month_click);
-    //$("#add-button").click({console.log("CHELLO")});
     // Set current month as active
     $(".months-row").children().eq(date.getMonth()).addClass("active-month");
     init_calendar(date);
     var events = check_events(today, date.getMonth()+1, date.getFullYear());
     show_events(events, months[date.getMonth()], today);
-});
+    });
 
 // Initialize the calendar by appending the HTML dates
 function init_calendar(date) {
@@ -160,24 +185,28 @@ function new_event(event) {
 }
 
 // Adds a json event to event_data
-function new_event_json(name, count, date, day) {
+function new_event_json(name, lecture, date, day) {
     var event = {
-        "occasion": name,
-        "invited_count": count,
+        "lecturerName": name,
+        "lectureName": lecture,
         "year": date.getFullYear(),
         "month": date.getMonth()+1,
-        "day": day
+        "day": day,
+        "start": start,
+        "end": end,
     };
     event_data["events"].push(event);
 }
 
-// Display all events of the selected date in card views
+/* Display all events of the selected date in card views
 function show_events(events, month, day) {
     // Clear the dates container
     $(".events-container").empty();
     $(".events-container").show(250);
     // If there are no events for this date, notify the user
-    if(events.length===0) {
+    let ev = event_data;
+    if(ev["events"].length===0) {
+
         var event_card = $("<div class='event-card'></div>");
         var event_name = $("<div class='event-name'>There are no lectures planned for "+month+" "+day+".</div>");
         $(event_card).css({ "border-left": "10px solid #333333" });
@@ -186,23 +215,27 @@ function show_events(events, month, day) {
     }
     else {
         // Go through and add each event as a card to the events container
-        for(var i=0; i<events.length; i++) {
+        for(let g=0; g < ev["events"].length; g++) {
+            //let list = check_events(day, month, event_data["events"][g]["year"]);
             var event_card = $("<div class='event-card'></div>");
-            var event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
-            var event_count = $("<div class='event-count'>"+events[i]["invited_count"]+" Invited</div>");
-            if(events[i]["cancelled"]===true) {
-                $(event_card).css({
-                    "border-left": "10px solid #333333"
-                });
-                event_count = $("<div class='event-cancelled'>Cancelled</div>");
+            var event_name = $("<div class='event-name'>"+ev["events"][g]["lectureName"]+":</div>");
+            var event_count = $("<div class='event-count'>"+ev["events"][g]["start"] + "\n" +ev["events"][g]["end"] +"</div>");
+            if( (months.indexOf(month)+1) === parseInt(ev["events"][g]["month"]) && day === parseInt(ev["events"][g]["day"])){
+                $(event_card).append(event_name).append(event_count);
+                $(".events-container").append(event_card);
             }
-            $(event_card).append(event_name).append(event_count);
-            $(".events-container").append(event_card);
+            else{
+                var event_card = $("<div class='event-card'></div>");
+                var event_name = $("<div class='event-name'>There are no lectures planned for "+month+" "+day+".</div>");
+                $(event_card).css({ "border-left": "10px solid #333333" });
+                $(event_card).append(event_name);
+                $(".events-container").append(event_card);
+                }
         }
     }
 }
 
-// Checks if a specific date has any events
+/* Checks if a specific date has any events
 function check_events(day, month, year) {
     var events = [];
     for(var i=0; i<event_data["events"].length; i++) {
@@ -214,110 +247,70 @@ function check_events(day, month, year) {
             }
     }
     return events;
-}
+}*/
 
-// Given data for events in JSON format
-var event_data = {
-    "events": [
-    {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10,
-        "cancelled": true
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10,
-        "cancelled": true
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10,
-        "cancelled": true
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10,
-        "cancelled": true
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10,
-        "cancelled": true
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10
-    },
-        {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10,
-        "cancelled": true
-    },
-    {
-        "occasion": " Repeated Test Event ",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 10
-    },
-    {
-        "occasion": " Test Event",
-        "invited_count": 120,
-        "year": 2020,
-        "month": 5,
-        "day": 11
-    }
-    ]
-};
 
-const months = [ 
-    "January", 
-    "February", 
-    "March", 
-    "April", 
-    "May", 
-    "June", 
-    "July", 
-    "August", 
-    "September", 
-    "October", 
-    "November", 
-    "December" 
-];
 
 })(jQuery);
+
+function parseDates(start, end, lecture, name){
+    let startYear = start.substring(0,4)
+    let startMonth = start.substring(6,7)
+    let startDay = start.substring(8,10)
+    let startHour = start.substring(11, 13)
+    let startMinute = start.substring(14,16);
+
+    let endYear = end.substring(0,4)
+    let endMonth = end.substring(6,7)
+    let endDay = end.substring(8,10)
+    let endHour = end.substring(11, 13)
+    let endMinute = end.substring(14,16);
+
+    var event = {
+            "lecturerName": name,
+            "lectureName": lecture,
+            "year": startYear,
+            "month": startMonth,
+            "day": startDay,
+            "start": `Starts at ${startHour}:${startMinute}`,
+            "end": "",
+    };
+
+    if(endYear === startYear && endMonth === startMonth && endDay === startDay ){
+    console.log("Same Day!")
+        event["end"] = `Ends at ${endHour}:${endMinute}`;
+    }
+    else{
+        event["end"] = `Ends at ${endHour}:${endMinute}, ${endDay}.${endMonth}.${endYear}.`;
+    }
+    event_data["events"].push(event);
+}
+
+function showLectures() {
+    //var xmlHttp = new XMLHttpRequest();
+
+
+    /*xmlHttp.open("GET", "http://localhost:8080/lecturers/get", false)
+    xmlHttp.send();
+    let data = JSON.parse(xmlHttp.responseText);
+    console.log(xmlHttp)
+    console.log(xmlHttp.responseText);
+    console.log(data)
+    let lecturerID = parseInt(selection.value)
+    event_data["events"] = []
+    if(data.length !== 0){
+        for(let i = 0; i < data.length; i++){
+
+        if(data[i].lectureDates !== undefined && data[i].lectureDates.length >= 1)
+            for(let j = 0; j < data[i].lectureDates.length; j++){
+                if(data[i].lectureDates[j].lecturer === lecturerID){
+                    let endDate = data[i].lectureDates[j].endDate;
+                    let startDate = data[i].lectureDates[j].startDate;
+                    parseDates(startDate, endDate, data[i].lectureDates[j].lecture.lectureName, data[i].lastName);
+                }
+            }
+        }
+    }*/
+}
+
+showLectures();

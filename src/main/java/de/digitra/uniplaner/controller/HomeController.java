@@ -10,10 +10,6 @@ public class HomeController {
     public String home(){
         return "home";
     }
-    @GetMapping("/lecture-calendar")
-    public String lectureCalendar() {
-        return "lecture-calendar";
-    }
 
     @GetMapping("/about-us")
     public String aboutUs() { return "about-us";}

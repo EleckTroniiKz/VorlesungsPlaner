@@ -28,13 +28,14 @@ import java.util.Optional;
 public class LecturerController implements ILecturerController {
 
     private LecturerService lecturerService;
-    private LectureService lectureService;
     private StudyProgramService studyProgramService;
+    private LectureService lectureService;
 
     LecturerController(LecturerService _lecturerService, StudyProgramService _studyProgramService, LectureService _lectureService){
         lecturerService =  _lecturerService;
         studyProgramService = _studyProgramService;
-        lectureService = _lectureService;
+        lectureService=_lectureService;
+
     }
 
 
@@ -55,26 +56,33 @@ public class LecturerController implements ILecturerController {
     @PostMapping
     public String createLecturer(@Valid Lecturer lecturer, Errors errors) {
         if(errors.hasErrors()){
-            return "create-lecturer";
+            return "redirect:/lecturers/create";
         }
         else{
-            System.out.println(lecturer);
             lecturerService.save(lecturer);
-            return "redirect:/lecturer";
+            return "redirect:/lecturers";
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) throws ResourceNotFoundException {
+
         Optional<Lecturer> lecturerToEdit = lecturerService.findOne(id);
-        model.addAttribute("lecturer", lecturerToEdit);
-        return "update-lecturer";
+        if(!lecturerToEdit.isPresent()){
+            throw new ResourceNotFoundException("Dozent wurde nicht gefunden!");
+        }
+        else {
+            model.addAttribute("lecturer", lecturerToEdit.get());
+            model.addAttribute("lectures", lectureService.findAll());
+            model.addAttribute("studyPrograms", studyProgramService.findAll());
+            return "update-lecturer";
+        }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid Lecturer lecturer, Errors errors) {
         if(errors.hasErrors()){
-            return "update-lecturer";
+            return "redirect:/lecturers/edit/"+id;
         }
         else{
             lecturerService.delete(id);
@@ -86,14 +94,14 @@ public class LecturerController implements ILecturerController {
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         lecturerService.delete(id);
-        return "redirect:/lecturer";
+        return "redirect:/lecturers";
     }
 
     @GetMapping("/search")
     public String searchLecturers(Model model, @RequestParam(required = false) Optional<Boolean> completed) {
         List<Lecturer> lecturer = lecturerService.findAll();
         model.addAttribute("lecturer", lecturer);
-        return "redirect:/lecturer";
+        return "redirect:/lecturers";
     }
 //----------------------------------------------------------------------------------------------------------------------
     @RequestMapping(value= "/post", method = RequestMethod.POST)
@@ -143,6 +151,7 @@ public class LecturerController implements ILecturerController {
     @RequestMapping(value="/get", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Lecturer>> getAlllecturers() {
+        System.out.println(lecturerService.findAll());
         return ResponseEntity.ok(lecturerService.findAll());
     }
 

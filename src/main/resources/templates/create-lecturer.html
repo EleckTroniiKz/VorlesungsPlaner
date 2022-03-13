@@ -34,31 +34,32 @@
                             
 
                                                          <div class="form-group">
-                               <label for="firstName">firstName</label>
-                                                                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="firstName">
+                               <label for="firstName">Vorname</label>
+                                                                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Vorname">
                                                             </div>
                                                          <div class="form-group">
-                               <label for="lastName">lastName</label>
-                                                                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="lastName">
+                               <label for="lastName">Nachname</label>
+                                                                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nachname">
                                                             </div>
-                                                         <div class="form-group">
-                               <label for="lectures">lectures</label>
-                                                             <select class="form-control" id="lectures" name="lectures" th:field="*{lectures}" multiple="multiple">
-                                                                 <option th:each="lecture : ${lectures}" th:value="${lecture.id}" th:text="${lecture}"/>
-                                                             </select>
-                                                            </div>
-                                                         <div class="form-group">
-                               <label for="email">email</label>
-                                                                <input type="text" id="email" name="email" class="form-control" placeholder="email">
-                                                            </div>
+                            <div class="form-group">
+                                <label for="email">E-Mail</label>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="E-Mail">
+                            </div>
+                            <div class="form-group">
+                                <label for="lectures">Vorlesungen</label>
+                                <select class="form-control" id="lectures" name="lectures" th:field="*{lectures}" multiple="multiple">
+                                    <option th:each="lecture : ${lectures}" th:value="${lecture.id}" th:text="${lecture.lectureName}"/>
+                                </select>
+                            </div>
+
                             
 
 
 
                                                             <div class="form-group">
-                                    <label  for="studyProgram">studyProgram </label>
+                                    <label  for="studyProgram">Studiengang </label>
                                     <select class="form-control" id="studyProgram" name="studyProgram" th:field="*{studyProgram.id}" >
-                                        <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}" th:text="${studyProgram}"/>
+                                        <option th:each="studyProgram : ${studyPrograms}" th:value="${studyProgram.id}" th:text="${studyProgram.shortName}"/>
                                     </select>
                                 </div>
                             
@@ -66,7 +67,9 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3">
-                                        <input type="submit" name="create-space" id="create-space" class="btn btn-success" value="Speichern">
+                                        <a type="submit" name="create-space" id="create-space" >
+                                            <button class="btn btn-outline-success">Speichern</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

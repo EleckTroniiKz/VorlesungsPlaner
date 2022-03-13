@@ -18,15 +18,13 @@
     <section id="space list">
         <div class="container">
             <div class="section-title">
-                <h2 style="color: #f2f2f2">Alle Studyprograms</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-                    fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <h2 style="color: #f2f2f2">Alle Studiengänge</h2>
+                <p>Hier die Übersicht der Studiengänge</p>
             </div>
 
 
             <div style="margin-bottom: 5px;">
-                <a th:href="@{/studyprograms/create}"><button class="start">Studyprogramm hinzufügen</button></a>
+                <a th:href="@{/studyprograms/create}"><button class="start">Studiengang hinzufügen</button></a>
                 <!--<a th:href="@{/web/studyprograms/create}" class="btn btn btn-success" role="button">
                     <i class="fa fa-users" aria-hidden="true"></i> StudyProgram hinzufügen</a>-->
             </div>
@@ -38,8 +36,8 @@
                         <table class="table "  style="color: #f3f3f3">
                             <thead>
                             <tr>
-                                                                                               <th>name</th>
-                                                                   <th>shortName</th>
+                                                                                               <th>Name</th>
+                                                                   <th>Kürzel</th>
                                                             
                             <th></th>
                             </tr>
@@ -51,9 +49,9 @@
                                                                      <td th:text="${studyprogram.shortName}"></td>
                                                                 <td>
                                     <input id="studyprogramid" type="hidden" th:value="${studyprogram.id}" >
-                                    <a th:href="@{/studyprograms/edit/{id}(id=${studyprogram.id})}" class="btn btn-success btn-sm" role="button">Bearbeiten</a>
+                                    <a th:href="@{/studyprograms/edit/{id}(id=${studyprogram.id})}" role="button"><button class="btn btn-outline-success" >Bearbeiten</button></a>
                                     <form th:action="@{/studyprograms/{id}(id=${studyprogram.id})}" th:object="${studyprogram}" th:method="delete" style='display:inline;'>
-                                        <button type="submit" class="btn btn-danger btn-sm">Löschen</button>
+                                        <button type="submit" class="btn btn-outline-danger">Löschen</button>
                                     </form>
 
                                 </td>

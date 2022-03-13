@@ -44,7 +44,6 @@ public class SemesterController implements ISemesterController{
 
         model.addAttribute("semester", new Semester());
         model.addAttribute("studyClasss",studyClassService.findAll());
-        System.out.println(model);
 
         return "create-semester";
     }

@@ -17,76 +17,68 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-6 text-center mb-5">
-				<h2 class="heading-section">Terminkalender</h2>
+				<h2 class="heading-section">Dozenten</h2>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="content w-100">
-					<div class="calendar-container">
-						<div class="calendar">
-							<div class="year-header">
-								<span class="left-button fa fa-chevron-left" id="prev"> </span>
-								<span class="year" id="label"></span>
-								<span class="right-button fa fa-chevron-right" id="next"> </span>
-							</div>
-							<table class="months-table w-100">
-								<tbody>
-								<tr class="months-row">
-									<td class="month">Jan</td>
-									<td class="month">Feb</td>
-									<td class="month">Mar</td>
-									<td class="month">Apr</td>
-									<td class="month">May</td>
-									<td class="month">Jun</td>
-									<td class="month">Jul</td>
-									<td class="month">Aug</td>
-									<td class="month">Sep</td>
-									<td class="month">Oct</td>
-									<td class="month">Nov</td>
-									<td class="month">Dec</td>
-								</tr>
-								</tbody>
-							</table>
+		<table class="table "  style="color: #f3f3f3">
+			<thead>
+			<tr>
+				<th>Vorname</th>
+				<th>Enddatum</th>
+				<th>E-Mail</th>
+				<th>StudyProgram</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="lecturer : ${lecturers}">
 
-							<table class="days-table w-100">
-								<td class="day">Sun</td>
-								<td class="day">Mon</td>
-								<td class="day">Tue</td>
-								<td class="day">Wed</td>
-								<td class="day">Thu</td>
-								<td class="day">Fri</td>
-								<td class="day">Sat</td>
-							</table>
-							<div class="frame">
-								<table class="dates-table w-100">
-									<tbody class="tbody">
-									</tbody>
-								</table>
-							</div>
-							<a th:href="@{/lecturedates/create}">
-							<button class="button" id="add-button" >Add lecture date</button>
-							</a>
-						</div>
-					</div>
-					<div class="events-container">
-					</div>
-					<div class="dialog" id="dialog">
-						<h2 class="dialog-header"> Add New Event </h2>
-						<form class="form" id="form">
-							<div class="form-container" align="center">
-								<label class="form-label" id="valueFromMyButton" for="name">Event name</label>
-								<input class="input" type="text" id="name" maxlength="36">
-								<label class="form-label" id="valueFromMyButton" for="count">Number of people to invite</label>
-								<input class="input" type="number" id="count" min="0" max="1000000" maxlength="7">
-								<input type="button" value="Cancel" class="button" id="cancel-button">
-								<input type="button" value="OK" class="button button-white" id="ok-button">
-							</div>
-						</form>
-					</div>
-				</div>
+				<td th:text="${lecturer.firstName}"></td>
+				<td th:text="${lecturer.lastName}"></td>
+				<td th:text="${lecturer.email}"></td>
+				<td th:text="${lecturer.studyProgram.shortName}"></td>
+				<td>
+					<input id="lecturerid" type="hidden" th:value="${lecturer.id}" >
+					<a th:href="@{/lecture-calendar/{id}(id=${lecturer.id})}" class="btn btn-outline-success" role="button">Zeige Dashboard</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div class="row justify-content-center">
+			<div class="col-md-6 text-center mb-5">
+				<h2 class="heading-section">Alle Kurstermine des ausgewählten Dozenten</h2>
 			</div>
 		</div>
+		<table class="table "  style="color: #f3f3f3">
+			<thead>
+			<tr>
+				<th>Startdatum</th>
+				<th>Enddatum</th>
+				<th>Kurs</th>
+				<th>Modul</th>
+				<th>Semester</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="lecturedate : ${lecturedates}">
+				<td th:text="${lecturedate.startDate}"></td>
+				<td th:text="${lecturedate.endDate}"></td>
+				<td th:text="${lecturedate.lecture.lectureName}"></td>
+				<td th:text="${lecturedate.lecture.modulName}"></td>
+				<td th:text="${lecturedate.semester.name}"></td>
+				<td>
+					<input id="lecturedateid" type="hidden" th:value="${lecturedate.id}" >
+					<a th:href="@{/lecturedates/edit/{id}(id=${lecturedate.id})}" class="btn btn-outline-success" role="button">Bearbeiten</a>
+					<form th:action="@{/lecturedates/{id}(id=${lecturedate.id})}" th:object="${lecturedate}" th:method="delete" style='display:inline;'>
+						<button type="submit" class="btn btn-outline-danger">Löschen</button>
+					</form>
+
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
 	</div>
 </section>
 
@@ -94,6 +86,11 @@
 <script src="/calendar/js/popper.js"></script>
 <script src="/calendar/js/bootstrap.min.js"></script>
 <script src="/calendar/js/main.js"></script>
+<script th:inline="javascript">
+	var stuff = [[${lecturers}]];
+	console.log(stuff);
+
+</script>
 </body>
 <div class="container" style="margin-bottom: 1em">
 	<div th:insert="fragments/general :: footer"></div>
