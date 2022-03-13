@@ -697,20 +697,10 @@ section {
       background: $secondary;
     }
   }
-.marvinUnderline{
-  position: relative;
-}
 
-.marvinUnderline::before{
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 0;
-  height: 2px;
-  background-color: #0074D9;
-  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
+  /*
+  Errorpage Animation
+  */
 
 div.errAnimation {
        animation: errora 2s ease 0s infinite normal forwards !important;
