@@ -2,11 +2,9 @@ package de.digitra.uniplaner.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "lecture_date")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = LectureDate.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id",scope = LectureDate.class)
 public class LectureDate implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,11 +22,9 @@ public class LectureDate implements Serializable {
     private Long id;
 
     @Column(name = "start_date")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endDate;
 
     @ManyToOne
@@ -72,7 +68,7 @@ public class LectureDate implements Serializable {
         return lecturer;
     }
 
-    public void setLecturer(Lecturer lecturer) {
+        public void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
     }
 
@@ -106,10 +102,10 @@ public class LectureDate implements Serializable {
     @Override
     public String toString() {
         return "LectureDate{" +
-                "id=" + getId() +
-                ", startDate='" + getStartDate() + "'" +
-                ", endDate='" + getEndDate() + "'" +
-                "}";
+            "id=" + getId() +
+            ", startDate='" + getStartDate() + "'" +
+            ", endDate='" + getEndDate() + "'" +
+            "}";
     }
 
     public Semester getSemester() {

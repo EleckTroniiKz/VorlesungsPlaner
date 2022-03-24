@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general :: header">
+
+    <title>Alle Kurse</title>
+
+
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+<div class="errAnimation">
+    <p class="errSchrift">
+        ErR�R
+
+    </p>
+</div>
+
+<p class="errSchrift2">
+    Tipp: Alt+F4 Drücken um die Seite neu zu laden ;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+</body>
+</html>

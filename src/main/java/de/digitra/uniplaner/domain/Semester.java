@@ -2,7 +2,6 @@ package de.digitra.uniplaner.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +14,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "semester")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Semester.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id", scope=Semester.class)
 public class Semester implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,11 +24,9 @@ public class Semester implements Serializable {
     private Long id;
 
     @Column(name = "start_date")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 
     @Column(name = "end_date")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
 
     @Column(name = "semester_number")
@@ -44,14 +41,14 @@ public class Semester implements Serializable {
     private StudyClass studyClass;
 
 
+
     @OneToMany(mappedBy = "semester", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<LectureDate> lectureDates = new HashSet<>();
 
-    public Set<LectureDate> getLectureDates() {
+    public Set<LectureDate> getLectureDates(){
         return lectureDates;
     }
-
     public Semester addLectureDate(LectureDate lectureDate) {
         this.lectureDates.add(lectureDate);
         lectureDate.setSemester(this);
@@ -63,6 +60,7 @@ public class Semester implements Serializable {
         lectureDate.setSemester(null);
         return this;
     }
+
 
 
     public Long getId() {
@@ -133,7 +131,6 @@ public class Semester implements Serializable {
     public void setStudyClass(StudyClass studyClass) {
         this.studyClass = studyClass;
     }
-
     @Override
     public String toString() {
         return "Semester{" +

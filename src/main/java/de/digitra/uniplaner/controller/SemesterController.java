@@ -97,71 +97,63 @@ public class SemesterController implements ISemesterController {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    @RequestMapping(value = "/createSemester", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Semester> createSemester(Semester semester) throws BadRequestException, URISyntaxException {
-        Semester sem = null;
+    public ResponseEntity<Semester> createSemester(@RequestBody Semester semester) throws BadRequestException {
         if (semester.getId() == null) {
-            try {
-                sem = semesterService.save(semester);
-            } catch (Error e) {
-                throw new BadRequestException("Couldnt save semester!");
-            }
-            return ResponseEntity.ok(sem);
+            return ResponseEntity.ok(semesterService.save(semester));
         }
-        throw new BadRequestException("Couldn't save semester");
+        else{
+            throw new BadRequestException("Semester nicht zulässig!");
+        }
     }
 
-    @RequestMapping(value = "/put", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateSemester", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Semester> updateSemester(@RequestBody Semester semester) throws BadRequestException {
-        Semester savedSemester = null;
-        if (semester.getId() != null) {
-            try {
-                semesterService.delete(semester.getId());
-                savedSemester = semesterService.save(semester);
-            } catch (Error e) {
-                throw new BadRequestException("Semester couldn't be saved");
-            }
-            return ResponseEntity.ok(savedSemester);
+        Semester temp = null;
+        if(semester.getId() != null){
+            temp = semester;
+            semesterService.delete(semester.getId());
+            return ResponseEntity.ok(semesterService.save(temp));
         }
-        return new ResponseEntity<Semester>(HttpStatus.OK);
-
+        else{
+            throw new BadRequestException("Semester ist nicht zulässig");
+        }
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateSemester/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<Semester> updateSemester(@PathVariable(value = "id") Long id, @Valid @RequestBody Semester semesterDetails) throws ResourceNotFoundException {
-        Semester sem = null;
-        if (semesterService.findOne(id).isPresent()) {
-            sem = semesterDetails;
+        Semester temp = null;
+        if(semesterService.findOne(id).isPresent()){
+            temp = semesterDetails;
             semesterService.delete(id);
-            return ResponseEntity.ok(semesterService.save(semesterDetails));
-        } else {
-            throw new ResourceNotFoundException("Semester not found!");
+            return ResponseEntity.ok(semesterService.save(temp));
+        }
+        else{
+            throw new ResourceNotFoundException("Semester konnte nicht gefunden werden!");
         }
     }
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "/getAllSemesters", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Semester>> getAllsemesters() {
-        List<Semester> sem = semesterService.findAll();
-        return ResponseEntity.ok(sem);
+        return ResponseEntity.ok(semesterService.findAll());
     }
 
-    @RequestMapping(value = "/getSemester", method = RequestMethod.GET)
+    @RequestMapping(value = "/getSemester/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Semester> getSemester(@PathVariable Long id) throws ResourceNotFoundException {
         Semester sem = null;
         if (semesterService.findOne(id).isPresent()) {
-            sem = semesterService.findOne(id).get();
+            return ResponseEntity.ok(semesterService.findOne(id).get());
         } else {
             throw new ResourceNotFoundException("Semester not found");
         }
-        return ResponseEntity.ok(sem);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteSemester/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<Void> deleteSemester(@PathVariable Long id) {
         semesterService.delete(id);

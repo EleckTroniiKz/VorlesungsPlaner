@@ -25,18 +25,19 @@ public class LectureService implements ILectureService {
     }
 
     @Override
-    public Lecture create(Lecture newLecture) {
-        return null;
-    }
-
-    @Override
     public Lecture save(Lecture lecture) {
         logger.debug("Request to save Lecture {}", lecture);
         return lectureRepository.save(lecture);
     }
 
+    //added from Can
+    public Lecture create(Lecture newLecture) {
+        return null;
+    }
+
     @Override
     public void delete(Long id) {
+        logger.debug("Request to delete Lecture {}", id);
         lectureRepository.deleteById(id);
     }
 
@@ -50,10 +51,5 @@ public class LectureService implements ILectureService {
     public Optional<Lecture> findOne(Long id) {
         logger.debug("Request to find Lecture {}", id);
         return lectureRepository.findById(id);
-    }
-
-    @Override
-    public Lecture update(Long id, Lecture lecture) {
-        return lectureRepository.save(lecture);
     }
 }

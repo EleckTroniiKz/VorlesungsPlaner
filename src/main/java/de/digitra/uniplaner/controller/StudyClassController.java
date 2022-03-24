@@ -92,77 +92,63 @@ public class StudyClassController implements IStudyClassController {
     }
     //------------------------------------------------------------------------------------------------------------------
 
-    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    @RequestMapping(value = "/createStudyClass", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<StudyClass> createStudyClass(StudyClass studyclass) throws BadRequestException, URISyntaxException {
-        StudyClass studyClass = null;
-        if (studyclass.getId() != null) {
-            try {
-                studyClass = studyClassService.save(studyclass);
-            } catch (Error e) {
-                throw new BadRequestException("Couldn't Save StudyClass");
-            }
+    public ResponseEntity<StudyClass> createStudyClass(@RequestBody StudyClass studyclass) throws BadRequestException {
+        if (studyclass.getId() == null) {
+            return ResponseEntity.ok(studyClassService.save(studyclass));
         } else {
-            throw new BadRequestException("ID exists");
+            throw new BadRequestException("StudyClass invalid!");
         }
-        return ResponseEntity.ok(studyClass);
     }
 
     @RequestMapping(value = "/updateStudyClass", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseEntity<StudyClass> updateStudyClass(StudyClass studyclass) throws BadRequestException {
-        StudyClass studyClass = null;
-        if (studyclass.getId() != null) {
-            try {
-                studyClass = studyClassService.save(studyclass);
-            } catch (Error e) {
-                throw new BadRequestException("Couldn't Update StudyClass");
-            }
+    public ResponseEntity<StudyClass> updateStudyClass(@RequestBody StudyClass studyclass) throws BadRequestException {
+        StudyClass temp = null;
+        if (studyclass.getId() == null) {
+            temp = studyclass;
+            studyClassService.delete(studyclass.getId());
+            return ResponseEntity.ok(studyClassService.save(temp));
         } else {
-            throw new BadRequestException("ID exists");
+            throw new BadRequestException("StudyClass invalid!");
         }
-        return ResponseEntity.ok(studyClass);
     }
 
-    @RequestMapping(value = "/put", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateStudyClass/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public ResponseEntity<StudyClass> updateStudyClass(@PathVariable Long id, @Valid @RequestBody StudyClass studyclassDetails) throws ResourceNotFoundException {
-        StudyClass studyClass = null;
+        StudyClass temp = null;
         if (studyClassService.findOne(id).isPresent()) {
-            try {
-                studyClass = studyClassService.save(studyclassDetails);
-            } catch (Error e) {
-                throw new ResourceNotFoundException("Couldn't Update StudyClass");
-            }
+            temp = studyclassDetails;
+            studyClassService.delete(id);
+            return ResponseEntity.ok(temp);
         } else {
-            throw new ResourceNotFoundException("ID exists");
+            throw new ResourceNotFoundException("StudyClass invalid!");
         }
-        return ResponseEntity.ok(studyClass);
     }
 
     @RequestMapping(value = "/getAllstudyclasss", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<StudyClass>> getAllstudyclasss() {
-        List<StudyClass> ls = null;
-        ls = studyClassService.findAll();
-        return ResponseEntity.ok(ls);
+        return ResponseEntity.ok(studyClassService.findAll());
     }
 
-    @RequestMapping(value = "/getStudyClass", method = RequestMethod.POST)
+    @RequestMapping(value = "/getStudyClass/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<StudyClass> getStudyClass(Long id) throws ResourceNotFoundException {
+    public ResponseEntity<StudyClass> getStudyClass(@PathVariable Long id) throws ResourceNotFoundException {
         StudyClass ls = null;
-        try {
-            ls = studyClassService.findOne(id).get();
-        } catch (Error e) {
+        if(studyClassService.findOne(id).isPresent()){
+            return ResponseEntity.ok(studyClassService.findOne(id).get());
+        }
+        else{
             throw new ResourceNotFoundException("StudyClass not found!");
         }
-        return ResponseEntity.ok(ls);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deleteStudyClass/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<Void> deleteStudyClass(Long id) {
+    public ResponseEntity<Void> deleteStudyClass(@PathVariable Long id) {
         studyClassService.delete(id);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }

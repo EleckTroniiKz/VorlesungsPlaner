@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/general :: header">
+    <title style="color: #f2f2f2"></title>
+</head>
+<body>
+<div class="container">
+    <div th:insert="fragments/general :: navigation"></div>
+</div>
+
+<!-- content -->
+<main id="main">
+    <section id="space" class="space-section"></section>
+    <section id="space list">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: #f2f2f2">Alle Kurse</h2>
+                <p>Hier kannst du die aktuellen Kurse ansehen und diese auch bearbeiten.</p>
+            </div>
+            <div style="margin-bottom: 5px;">
+                <a th:href="@{/lectures/create}">
+                    <button class="start">Kurs hinzufügen</button>
+                </a>
+            </div>
+            <div class="table-responsive wishlist-table margin-bottom-none">
+                <table class="table " style="color: #f3f3f3">
+                    <thead>
+                    <tr>
+                        <th>Kursname</th>
+                        <th>Modulname</th>
+                        <th>Dauer</th>
+                        <th>Dozenten</th>
+                        <th>Studiengang</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lecture : ${lectures}">
+                        <td th:text="${lecture.lectureName}"></td>
+                        <td th:text="${lecture.modulName}"></td>
+                        <td th:text="${lecture.duration}"></td>
+                        <td>
+                            <div th:each="test:${lecture.lecturers}">
+                                <p th:text="${test.lastName}"></p>
+                            </div>
+                        </td>
+                        <td th:text="${lecture.studyProgram.shortName}"></td>
+                        <td>
+                            <input id="lectureid" type="hidden" th:value="${lecture.id}">
+                            <a th:href="@{/lectures/edit/{id}(id=${lecture.id})}" class="btn btn-outline-success"
+                               role="button">Bearbeiten</a>
+                            <form th:action="@{/lectures/{id}(id=${lecture.id})}" th:object="${lecture}"
+                                  th:method="delete" style='display:inline;'>
+                                <button type="submit" class="btn btn-outline-danger">Löschen</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="fragments/general.html :: jquery"></div>
+<div th:replace="fragments/general.html :: bootstrap"></div>
+
+
+</body>
+</html>
+

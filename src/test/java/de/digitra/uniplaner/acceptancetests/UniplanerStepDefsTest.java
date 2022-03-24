@@ -43,8 +43,8 @@ public class UniplanerStepDefsTest extends CucumberSpringContextConfiguration {
     private static final ZonedDateTime DATE_NOW = ZonedDateTime.now();
     private static final ZonedDateTime DATE_AFTER_NOW = ZonedDateTime.now().plus(1, DAYS);
     private final long DEFAULT_SEMESTER_NUMBER = 2;
-    private final String DEFAULT_MODULE_NAME = "DEFAULT MODULE NAME";
-    private final String DEFAULT_STUDY_PROGRAM_NAME = "DEFAULT STUDY PROGRAM NAME";
+    private final String DEFAULT_MODULE_NAME ="DEFAULT MODULE NAME" ;
+    private final String DEFAULT_STUDY_PROGRAM_NAME ="DEFAULT STUDY PROGRAM NAME" ;
 
 
     @Autowired
@@ -57,17 +57,15 @@ public class UniplanerStepDefsTest extends CucumberSpringContextConfiguration {
     @Autowired
     private LectureRepository lectureRepo;
     Lecture lecture = null;
-    int oldCount = 0;
+    int oldCount =0;
 
     @Autowired
-    private StudyProgramRepository studyProgramRepo;
-    ;
+    private StudyProgramRepository studyProgramRepo;;
     StudyProgram studyProgram;
     RestClient restClient = null;
-
     public void before() {
         lectureDateRepo.deleteAll();
-        restClient = new RestClient(restTemplate, port);
+        restClient = new RestClient(restTemplate,port);
 
     }
 
@@ -78,12 +76,10 @@ public class UniplanerStepDefsTest extends CucumberSpringContextConfiguration {
     LectureDate lectureDate = null;
 
     List<LectureDate> lectureDates = null;
-
     @Given("the user saves the lecture date instance in the system")
     public void the_user_saves_the_lecture_date_instance_in_the_system() {
         lectureDate = lectureDateRepo.save(lectureDate);
     }
-
     @Then("the result list contains one lecture date")
     public void theResultListWillContainOneLectureDate() {
         assertThat(lectureDates.size()).isGreaterThan(0);

@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Klasse stellt eine Vorlesung dar.
+ * Klasse stellt eine Entität im Dozenten Dashhboard dar.
  */
 @Entity
 public class Calendar implements Serializable {

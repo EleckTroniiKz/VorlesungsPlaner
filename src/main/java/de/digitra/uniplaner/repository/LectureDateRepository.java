@@ -11,7 +11,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface LectureDateRepository extends JpaRepository<LectureDate, Long> {
     List<LectureDate> findByLecturerId(long lecturerId);
-
     List<LectureDate> findByStartDate(LocalDateTime startDate);
 
 }

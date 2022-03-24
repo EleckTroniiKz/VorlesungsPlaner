@@ -95,53 +95,67 @@ public class LectureDateController implements ILectureDateController {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    @RequestMapping(value = "/getLectureDate", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<LectureDate> getLectureDate(@PathVariable Long id) throws ResourceNotFoundException {
-        if (lectureDateService.findOne(id).isPresent()) {
-            return ResponseEntity.ok(lectureDateService.findOne(id).get());
-        } else {
-            return new ResponseEntity<LectureDate>(HttpStatus.OK);
-        }
-    }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/CreateLectureDate", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deleteLectureDate(@PathVariable Long id) throws ResourceNotFoundException {
-
-        lectureDateService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-    }
-
-    @RequestMapping(value = "/post", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<LectureDate> createLectureDate(LectureDate lectureDate) throws BadRequestException, URISyntaxException {
+    public ResponseEntity<LectureDate> createLectureDate(@RequestBody LectureDate lectureDate) throws BadRequestException {
         LectureDate date = null;
-        try {
-            date = lectureDateService.save(lectureDate);
-        } catch (Error e) {
-            throw new BadRequestException("Something went wrong with the saving process");
+        if(lectureDate.getId() != null) {
+            return ResponseEntity.ok(lectureDateService.save(lectureDate));
         }
-        return ResponseEntity.ok(date);
+        throw new BadRequestException("LectureDate ist nicht zulässig!");
     }
 
-    @RequestMapping(value = "getAllLectureDates", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateLectureDate", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity<LectureDate> updateLectureDate(@RequestBody LectureDate lectureDate) throws BadRequestException {
+        if(lectureDate.getId() != null){
+            LectureDate temp = lectureDate;
+            lectureDateService.delete(lectureDate.getId());
+            return ResponseEntity.ok(lectureDateService.save(temp));
+        }
+        else{
+            throw new BadRequestException("LectureDate nicht zulässig!");
+        }
+    }
+
+    @RequestMapping(value = "/updateLectureDateWithID/{id}", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity<LectureDate> updateLectureDate(@PathVariable Long id, @Valid @RequestBody LectureDate lecturedateDetails) throws ResourceNotFoundException {
+        if(lectureDateService.findOne(id).isPresent()){
+            LectureDate temp = lecturedateDetails;
+            lectureDateService.delete(id);
+            return ResponseEntity.ok(lectureDateService.save(temp));
+        }
+        else{
+            throw new ResourceNotFoundException("LectureDate mit der id nicht gefunden!");
+        }
+    }
+
+    @RequestMapping(value = "/getAllLectureDates", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<LectureDate>> getAlllecturedates() {
         return ResponseEntity.ok(lectureDateService.findAll());
     }
 
-    @RequestMapping(value = "/updateLectureDate", method = RequestMethod.PUT)
+    @RequestMapping(value = "/getLectureDate/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<LectureDate> updateLectureDate(LectureDate lectureDate) throws BadRequestException {
-        //wie soll das updaten ablaufen?
-        return null;
+    public ResponseEntity<LectureDate> getLectureDate(@PathVariable Long id) throws ResourceNotFoundException {
+        if (lectureDateService.findOne(id).isPresent()) {
+            return ResponseEntity.ok(lectureDateService.findOne(id).get());
+        } else {
+            throw new ResourceNotFoundException("LectureDate mit dieser ID nicht gefunden");
+        }
     }
 
-    @RequestMapping(value = "/updateLectureDateWithID", method = RequestMethod.PUT)
+    @RequestMapping(value = "/deleteLectureDate/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<LectureDate> updateLectureDate(Long id, LectureDate lecturedateDetails) throws ResourceNotFoundException {
-        return null;
+    public ResponseEntity<Void> deleteLectureDate(@PathVariable Long id){
+        lectureDateService.delete(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
+
+
+
 
 }
