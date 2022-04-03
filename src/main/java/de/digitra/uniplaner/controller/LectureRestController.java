@@ -1,25 +1,34 @@
 package de.digitra.uniplaner.controller;
 
 import de.digitra.uniplaner.domain.Lecture;
+import de.digitra.uniplaner.domain.LectureDate;
+import de.digitra.uniplaner.domain.Lecturer;
 import de.digitra.uniplaner.exceptions.BadRequestException;
 import de.digitra.uniplaner.exceptions.ResourceNotFoundException;
 import de.digitra.uniplaner.interfaces.ILectureController;
+import de.digitra.uniplaner.service.LectureDateService;
 import de.digitra.uniplaner.service.LectureService;
+import de.digitra.uniplaner.service.LecturerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("web/lectures")
 public class LectureRestController  implements ILectureController {
 
     private LectureService lectureService;
+    private LecturerService lecturerService;
+    private LectureDateService lectureDateService;
 
-    public LectureRestController(LectureService lectureService){
+    public LectureRestController(LectureService lectureService, LecturerService lecturerService, LectureDateService lectureDateService){
         this.lectureService = lectureService;
+        this.lecturerService = lecturerService;
+        this.lectureDateService = lectureDateService;
     }
 
     @PostMapping("/createLectureRest")
@@ -28,8 +37,7 @@ public class LectureRestController  implements ILectureController {
             throw new BadRequestException("Lecture ist nicht Zulässig!");
         }
         else{
-            Lecture newLecture = lectureService.create(lecture);
-            return ResponseEntity.ok(newLecture);
+            return ResponseEntity.ok(lectureService.save(lecture));
         }
     }
 
@@ -70,7 +78,29 @@ public class LectureRestController  implements ILectureController {
 
     @DeleteMapping("/deleteLecture/{id}")
     public ResponseEntity<Void> deleteLecture(@PathVariable Long id) {
-        lectureService.delete(id);
+        if(lectureService.findOne(id).isPresent()){
+            Lecture lecture = lectureService.findOne(id).get();
+
+            //LectureDate Update
+            Set<LectureDate> lectureDates = lecture.getLectureDates();
+            if(lectureDates != null){
+                lectureDates.remove(lecture);
+                for(LectureDate lectureDate: lectureDates){
+                    lectureDate.setLecture(null);
+                    lectureDateService.save(lectureDate);
+                }
+            }
+            Set<Lecturer> lecturers = lecture.getLecturers();
+            if(lecturers != null){
+                for(Lecturer lecturer : lecturers){
+                    Set<Lecture> lectures = lecturer.getLectures();
+                    lectures.remove(lecture);
+                    lecturer.setLectures(lectures);
+                    lecturerService.save(lecturer);
+                }
+            }
+            lectureService.delete(id);
+        }
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }

@@ -30,10 +30,7 @@ public class LectureService implements ILectureService {
         return lectureRepository.save(lecture);
     }
 
-    //added from Can
-    public Lecture create(Lecture newLecture) {
-        return null;
-    }
+
 
     @Override
     public void delete(Long id) {

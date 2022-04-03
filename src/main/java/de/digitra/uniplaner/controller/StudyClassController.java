@@ -21,8 +21,8 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/studyclasss")
-public class StudyClassController implements IStudyClassController {
+@RequestMapping("/studyclass")
+public class StudyClassController{
 
     private StudyClassService studyClassService;
     private StudyProgramService studyProgramService;
@@ -34,7 +34,7 @@ public class StudyClassController implements IStudyClassController {
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("studyclasss", studyClassService.findAll());
+        model.addAttribute("studyclass", studyClassService.findAll());
         return "studyclass-list";
     }
 
@@ -48,10 +48,10 @@ public class StudyClassController implements IStudyClassController {
     @PostMapping
     public String createStudyClass(@Valid StudyClass studyClass, Errors errors) {
         if (errors.hasErrors()) {
-            return "redirect:/studyclasss/create";
+            return "redirect:/studyclass/create";
         } else {
             studyClassService.save(studyClass);
-            return "redirect:/studyclasss";
+            return "redirect:/studyclass";
         }
     }
 
@@ -70,18 +70,18 @@ public class StudyClassController implements IStudyClassController {
     @PutMapping("/edit/{id}")
     public String update(@PathVariable Long id, @Valid StudyClass studyClass, Errors errors) {
         if (errors.hasErrors()) {
-            return "redirect:/studyclasss/edit/" + id;
+            return "redirect:/studyclass/edit/" + id;
         } else {
             studyClassService.delete(id);
             studyClassService.save(studyClass);
-            return "redirect:/studyclasss";
+            return "redirect:/studyclass";
         }
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         studyClassService.delete(id);
-        return "redirect:/studyclasss";
+        return "redirect:/studyclass";
     }
 
     @GetMapping("/search")
@@ -92,64 +92,4 @@ public class StudyClassController implements IStudyClassController {
     }
     //------------------------------------------------------------------------------------------------------------------
 
-    @RequestMapping(value = "/createStudyClass", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<StudyClass> createStudyClass(@RequestBody StudyClass studyclass) throws BadRequestException {
-        if (studyclass.getId() == null) {
-            return ResponseEntity.ok(studyClassService.save(studyclass));
-        } else {
-            throw new BadRequestException("StudyClass invalid!");
-        }
-    }
-
-    @RequestMapping(value = "/updateStudyClass", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<StudyClass> updateStudyClass(@RequestBody StudyClass studyclass) throws BadRequestException {
-        StudyClass temp = null;
-        if (studyclass.getId() == null) {
-            temp = studyclass;
-            studyClassService.delete(studyclass.getId());
-            return ResponseEntity.ok(studyClassService.save(temp));
-        } else {
-            throw new BadRequestException("StudyClass invalid!");
-        }
-    }
-
-    @RequestMapping(value = "/updateStudyClass/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<StudyClass> updateStudyClass(@PathVariable Long id, @Valid @RequestBody StudyClass studyclassDetails) throws ResourceNotFoundException {
-        StudyClass temp = null;
-        if (studyClassService.findOne(id).isPresent()) {
-            temp = studyclassDetails;
-            studyClassService.delete(id);
-            return ResponseEntity.ok(temp);
-        } else {
-            throw new ResourceNotFoundException("StudyClass invalid!");
-        }
-    }
-
-    @RequestMapping(value = "/getAllstudyclasss", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<StudyClass>> getAllstudyclasss() {
-        return ResponseEntity.ok(studyClassService.findAll());
-    }
-
-    @RequestMapping(value = "/getStudyClass/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<StudyClass> getStudyClass(@PathVariable Long id) throws ResourceNotFoundException {
-        StudyClass ls = null;
-        if(studyClassService.findOne(id).isPresent()){
-            return ResponseEntity.ok(studyClassService.findOne(id).get());
-        }
-        else{
-            throw new ResourceNotFoundException("StudyClass not found!");
-        }
-    }
-
-    @RequestMapping(value = "/deleteStudyClass/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseEntity<Void> deleteStudyClass(@PathVariable Long id) {
-        studyClassService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
 }

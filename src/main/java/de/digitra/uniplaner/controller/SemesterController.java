@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/semesters")
-public class SemesterController implements ISemesterController {
+public class SemesterController{
 
     private SemesterService semesterService;
     private StudyClassService studyClassService;
@@ -97,67 +97,5 @@ public class SemesterController implements ISemesterController {
     }
 
     //------------------------------------------------------------------------------------------------------------------
-    @RequestMapping(value = "/createSemester", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Semester> createSemester(@RequestBody Semester semester) throws BadRequestException {
-        if (semester.getId() == null) {
-            return ResponseEntity.ok(semesterService.save(semester));
-        }
-        else{
-            throw new BadRequestException("Semester nicht zulässig!");
-        }
-    }
-
-    @RequestMapping(value = "/updateSemester", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<Semester> updateSemester(@RequestBody Semester semester) throws BadRequestException {
-        Semester temp = null;
-        if(semester.getId() != null){
-            temp = semester;
-            semesterService.delete(semester.getId());
-            return ResponseEntity.ok(semesterService.save(temp));
-        }
-        else{
-            throw new BadRequestException("Semester ist nicht zulässig");
-        }
-    }
-
-    @RequestMapping(value = "/updateSemester/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<Semester> updateSemester(@PathVariable(value = "id") Long id, @Valid @RequestBody Semester semesterDetails) throws ResourceNotFoundException {
-        Semester temp = null;
-        if(semesterService.findOne(id).isPresent()){
-            temp = semesterDetails;
-            semesterService.delete(id);
-            return ResponseEntity.ok(semesterService.save(temp));
-        }
-        else{
-            throw new ResourceNotFoundException("Semester konnte nicht gefunden werden!");
-        }
-    }
-
-    @RequestMapping(value = "/getAllSemesters", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<Semester>> getAllsemesters() {
-        return ResponseEntity.ok(semesterService.findAll());
-    }
-
-    @RequestMapping(value = "/getSemester/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Semester> getSemester(@PathVariable Long id) throws ResourceNotFoundException {
-        Semester sem = null;
-        if (semesterService.findOne(id).isPresent()) {
-            return ResponseEntity.ok(semesterService.findOne(id).get());
-        } else {
-            throw new ResourceNotFoundException("Semester not found");
-        }
-    }
-
-    @RequestMapping(value = "/deleteSemester/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseEntity<Void> deleteSemester(@PathVariable Long id) {
-        semesterService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-    }
 
 }

@@ -25,7 +25,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/lecturers")
-public class LecturerController implements ILecturerController {
+public class LecturerController{
 
     private LecturerService lecturerService;
     private StudyProgramService studyProgramService;
@@ -101,78 +101,5 @@ public class LecturerController implements ILecturerController {
     }
 
     //----------------------------------------------------------------------------------------------------------------------
-    @RequestMapping(value = "/createLecturer", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Lecturer> createLecturer(@RequestBody Lecturer lecturer) throws BadRequestException, DuplicateEmailException {
-        if(lecturer.getId() != null){
-                String email = lecturer.getEmail();
-                List<Lecturer> list = lecturerService.findAll();
-                Boolean emailExists = false;
-                for(var i = 0; i < list.size(); i++) {
-                    if (email == list.get(i).getEmail()) {
-                        emailExists = true;
-                    }
-                }
-                if(emailExists == false){
-                    return ResponseEntity.ok(lecturerService.save(lecturer));
-                }
-                else{
-                    throw new DuplicateEmailException("Es existiert schon ein Dozent mit dieser E-Mail");
-                }
-            }
-        else{
-            throw new BadRequestException("Lecturer ist nicht zulässig!");
-        }
-    }
 
-    @RequestMapping(value = "/updateLecturer", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<Lecturer> updateLecturer(@RequestBody Lecturer lecturer) throws BadRequestException {
-        Lecturer temp = null;
-        if (lecturerService.findOne(lecturer.getId()) != null) {
-            temp = lecturer;
-            lecturerService.delete(lecturer.getId());
-            return ResponseEntity.ok(lecturerService.save(temp));
-        } else {
-            throw new BadRequestException("Lecturer ist nicht zulässig!");
-        }
-    }
-
-    @RequestMapping(value = "/updateLecturerById/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<Lecturer> updateLecturer(@PathVariable(value = "id") Long id, @Valid @RequestBody Lecturer lecturerDetails) throws ResourceNotFoundException {
-        Lecturer temp = null;
-        if (lecturerService.findOne(id).isPresent()) {
-            temp = lecturerDetails;
-            lecturerService.delete(id);
-            return ResponseEntity.ok(lecturerService.save(temp));
-        } else {
-            throw new ResourceNotFoundException("Couldn'T find Lecturer");
-        }
-    }
-
-    @RequestMapping(value = "/getAllLecturers", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<Lecturer>> getAlllecturers() {
-        return ResponseEntity.ok(lecturerService.findAll());
-    }
-
-    @RequestMapping(value = "/getLecturer/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Lecturer> getLecturer(@PathVariable Long id) throws ResourceNotFoundException {
-        if (lecturerService.findOne(id).isPresent()) {
-            return ResponseEntity.ok(lecturerService.findOne(id).get());
-        } else {
-            throw new ResourceNotFoundException("No Lecturer with that ID found!");
-        }
-    }
-
-    @RequestMapping(value = "/deleteLecturer/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseEntity<Void> deleteLecturer(@PathVariable Long id) {
-        if (lecturerService.findOne(id).isPresent()) {
-            lecturerService.delete(id);
-        }
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-    }
 }

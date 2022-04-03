@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/studyprograms")
-public class StudyProgramController implements IStudyProgramController {
+public class StudyProgramController{
     @Autowired
     private StudyProgramService studyProgramService;
 
@@ -84,66 +84,5 @@ public class StudyProgramController implements IStudyProgramController {
     }
 
     //_________________________________________________________________________________________________________________
-    @RequestMapping(value = "/createStudyProgram", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<StudyProgram> createStudyProgram(@RequestBody StudyProgram studyprogram) throws BadRequestException {
-        if(studyprogram.getId() == null){
-            return ResponseEntity.ok(studyProgramService.save(studyprogram));
-        }
-        else{
-            throw new BadRequestException("StudyProgram nicht zulässig!");
-        }
-    }
 
-    @RequestMapping(value = "/updateStudyProgram", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<StudyProgram> updateStudyProgram(@RequestBody StudyProgram studyprogram) throws BadRequestException {
-       StudyProgram temp = null;
-       if(studyprogram.getId() != null){
-            temp = studyprogram;
-            studyProgramService.delete(studyprogram.getId());
-            return ResponseEntity.ok(studyProgramService.save(temp));
-       }
-       else{
-            throw new BadRequestException("");
-       }
-    }
-
-    @RequestMapping(value = "/updateStudyProgramByID/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<StudyProgram> updateStudyProgram(@PathVariable Long id, @Valid @RequestBody StudyProgram studyprogramDetails) throws ResourceNotFoundException {
-        StudyProgram temp = null;
-        if(studyProgramService.findOne(id).isPresent()){
-            temp = studyprogramDetails;
-            studyProgramService.delete(id);
-            return ResponseEntity.ok(studyProgramService.save(temp));
-        }
-        else{
-            throw new ResourceNotFoundException("StudyProgram not found!");
-        }
-    }
-
-    @RequestMapping(value = "/getAllStudyPrograms", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<StudyProgram>> getAllstudyprograms() {
-        return ResponseEntity.ok(studyProgramService.findAll());
-    }
-
-    @RequestMapping(value = "/getStudyProgram/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<StudyProgram> getStudyProgram(@PathVariable Long id) throws ResourceNotFoundException {
-        if(studyProgramService.findOne(id).isPresent()){
-            return ResponseEntity.ok(studyProgramService.findOne(id).get());
-        }
-        else{
-            throw new ResourceNotFoundException("");
-        }
-    }
-
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseEntity<Void> deleteStudyProgram(@PathVariable Long id) {
-        studyProgramService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
 }
