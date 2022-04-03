@@ -24,7 +24,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/lectures")
-public class LectureController implements ILectureController {
+public class LectureController {
 
 
     private LectureService lectureService;
@@ -97,75 +97,4 @@ public class LectureController implements ILectureController {
         return "redirect:/lectures";
     }
 
-    @GetMapping("/search")
-    public String searchLectures(Model model, @RequestParam(required = false) Optional<Boolean> completed) {
-        List<Lecture> lecture = lectureService.findAll();
-        model.addAttribute("lectures", lecture);
-        return "redirect:/lectures";
-    }
-//----------------------------------------------------------------------------------------------------------------------
-    @RequestMapping(value = "/CreateLectureRest", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Lecture> createLecture(@RequestBody Lecture lecture) throws BadRequestException {
-        if(lecture.getId() != null){
-            throw new BadRequestException("Lecture ist nicht Zulässig!");
-        }
-        else{
-            Lecture newLecture = lectureService.create(lecture);
-            return ResponseEntity.ok(newLecture);
-        }
-    }
-
-    @RequestMapping(value = "/UpdateLectureByID/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<Lecture> updateLecture(@PathVariable(value = "id") Long id, @Valid @RequestBody Lecture lectureDetails) throws ResourceNotFoundException {
-        Lecture lec = null;
-        if (lectureService.findOne(id).isPresent()) {
-            lec = lectureDetails;
-            lectureService.delete(id);
-            return ResponseEntity.ok(lectureService.save(lectureDetails));
-        } else {
-            throw new ResourceNotFoundException("Lecture not found!");
-        }
-    }
-
-    @RequestMapping(value = "/UpdateLectureRest", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<Lecture> updateLecture(@RequestBody Lecture lecture) throws BadRequestException {
-        Lecture savedLecture = null;
-        if (lecture.getId() != null) {
-            lectureService.delete(lecture.getId());
-            savedLecture = lectureService.save(lecture);
-
-            return ResponseEntity.ok(savedLecture);
-        }
-        else{
-            throw new BadRequestException(("Lecture ist nicht zulässig"));
-        }
-    }
-
-    @RequestMapping(value = "/getAllLectures", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<Lecture>> getAlllectures() {
-        return ResponseEntity.ok(lectureService.findAll());
-    }
-
-    @RequestMapping(value = "/getLectureById/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Lecture> getLecture(@PathVariable Long id) throws ResourceNotFoundException {
-        Lecture temp = null;
-        if (lectureService.findOne(id).isPresent()) {
-            return ResponseEntity.ok(lectureService.findOne(id).get());
-        } else {
-            throw new ResourceNotFoundException("Lecture with that ID not found!");
-        }
-    }
-
-
-    @RequestMapping(value = "/DeleteLecture/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseEntity<Void> deleteLecture(@PathVariable Long id) {
-        lectureService.delete(id);
-        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-    }
 }
