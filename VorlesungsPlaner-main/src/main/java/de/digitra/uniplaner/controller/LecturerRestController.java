@@ -19,9 +19,11 @@ import java.util.List;
 public class LecturerRestController implements ILecturerController {
 
     private LecturerService lecturerService;
+    private LectureDateService lectureDateService;
 
-    public LecturerRestController(LecturerService lecturerService){
+    public LecturerRestController(LecturerService lecturerService, LectureDateService lectureDateService){
         this.lecturerService = lecturerService;
+        this.lectureDateService = lectureDateService;
     }
 
     @PostMapping("/createLecturerRest")

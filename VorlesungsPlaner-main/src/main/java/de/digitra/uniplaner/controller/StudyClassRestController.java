@@ -52,7 +52,7 @@ public class StudyClassRestController implements IStudyClassController {
         }
     }
 
-    @GetMapping("/getAllStudyclasses")
+    @GetMapping("/getAllStudyClasses")
     public ResponseEntity<List<StudyClass>> getAllstudyclasss() {
         return ResponseEntity.ok(studyClassService.findAll());
     }

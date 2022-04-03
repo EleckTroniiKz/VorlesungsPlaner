@@ -24,7 +24,8 @@ public class StudyProgramRestController implements IStudyProgramController {
     }
 
     @PostMapping("/createStudyProgramRest")
-    public ResponseEntity<StudyProgram> createStudyProgram(@RequestBody StudyProgram studyprogram) throws BadRequestException {
+    public ResponseEntity<StudyProgram> createStudyProgram(@Valid @RequestBody StudyProgram studyprogram) throws BadRequestException {
+        System.out.println(studyprogram);
         if(studyprogram.getId() != null){
             throw new BadRequestException("StudyProgram nicht zulässig!");
         }
@@ -36,7 +37,6 @@ public class StudyProgramRestController implements IStudyProgramController {
     @PutMapping ("/updateStudyProgramRest")
     public ResponseEntity<StudyProgram> updateStudyProgram(@RequestBody StudyProgram studyprogram) throws BadRequestException {
         if(studyprogram.getId() != null){
-            studyProgramService.delete(studyprogram.getId());
             return ResponseEntity.ok(studyProgramService.save(studyprogram));
         }
         else{
@@ -70,7 +70,7 @@ public class StudyProgramRestController implements IStudyProgramController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteStudyProgram/{id}")
     public ResponseEntity<Void> deleteStudyProgram(@PathVariable Long id) {
         studyProgramService.delete(id);
         return new ResponseEntity<Void>(HttpStatus.OK);
