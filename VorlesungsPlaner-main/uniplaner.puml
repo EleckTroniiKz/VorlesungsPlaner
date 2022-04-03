@@ -1,0 +1,192 @@
+@startuml
+class de.digitra.uniplaner.domain.StudyProgram {
+- {static} long serialVersionUID
+- Long id
+- String name
+- String shortName
+- Set<StudyClass> studyClasses
+- Set<Lecture> lectures
+- Set<Lecturer> lecturers
++ Set<Lecturer> getLecturers()
++ StudyProgram addLecturer(Lecturer)
++ StudyProgram removeLecturer(Lecturer)
++ Set<Lecture> getLectures()
++ StudyProgram addLecture(Lecture)
++ StudyProgram removeLecture(Lecture)
++ void setLectures(Set<Lecture>)
++ Long getId()
++ void setId(Long)
++ String getName()
++ void setName(String)
++ String getShortName()
++ void setShortName(String)
++ Set<StudyClass> getStudyClasses()
++ StudyProgram addStudyClass(StudyClass)
++ StudyProgram removeStudyClass(StudyClass)
++ void setStudyClasses(Set<StudyClass>)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
+}
+note top: Studiengang, zum Beispiel Informatik
+
+class de.digitra.uniplaner.domain.Lecture {
+- {static} long serialVersionUID
+- Long id
+- String lectureName
+- String modulName
+- Long duration
+- Set<LectureDate> lectureDates
+- Set<Lecturer> lecturers
+- StudyProgram studyProgram
++ StudyProgram getStudyProgram()
++ void setStudyProgram(StudyProgram)
++ Long getId()
++ void setId(Long)
++ String getLectureName()
++ void setLectureName(String)
++ String getModulName()
++ void setModulName(String)
++ Long getDuration()
++ void setDuration(Long)
++ Set<LectureDate> getLectureDates()
++ Lecture addLectureDate(LectureDate)
++ Lecture removeLectureDate(LectureDate)
++ void setLectureDates(Set<LectureDate>)
++ Set<Lecturer> getLecturers()
++ Lecture addLecturer(Lecturer)
++ Lecture removeLecturer(Lecturer)
++ void setLecturers(Set<Lecturer>)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
++ StudyProgram getStudyProgramm()
++ void setStudyProgramm(StudyProgram)
+}
+note left: Vorlesung, zum Beispiel Web Engineering
+class de.digitra.uniplaner.domain.LectureDate {
+- {static} long serialVersionUID
+- Long id
+- LocalDateTime startDate
+- LocalDateTime endDate
+- Lecturer lecturer
+- Lecture lecture
+- Semester semester
++ Long getId()
++ void setId(Long)
++ LocalDateTime getStartDate()
++ void setStartDate(LocalDateTime)
++ LocalDateTime getEndDate()
++ void setEndDate(LocalDateTime)
++ Lecturer getLecturer()
++ void setLecturer(Lecturer)
++ Lecture getLecture()
++ void setLecture(Lecture)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
++ Semester getSemester()
++ void setSemester(Semester)
+}
+note left: Vorlesungstermin
+
+class de.digitra.uniplaner.domain.Semester {
+- {static} long serialVersionUID
+- Long id
+- LocalDate startDate
+- LocalDate endDate
+- Long number
+- String name
+- StudyClass studyClass
+- Set<LectureDate> lectureDates
++ Set<LectureDate> getLectureDates()
++ Semester addLectureDate(LectureDate)
++ Semester removeLectureDate(LectureDate)
++ Long getId()
++ void setId(Long)
++ LocalDate getStartDate()
++ void setStartDate(LocalDate)
++ LocalDate getEndDate()
++ void setEndDate(LocalDate)
++ Long getNumber()
++ void setNumber(Long)
++ String getName()
++ void setName(String)
++ boolean equals(Object)
++ int hashCode()
++ StudyClass getStudyClass()
++ void setStudyClass(StudyClass)
++ String toString()
+}
+class de.digitra.uniplaner.domain.StudyClass {
+- {static} long serialVersionUID
+- Long id
+- String name
+- LocalDate startDate
+- LocalDate endDate
+- Set<Semester> semesters
+- StudyProgram studyProgram
++ Long getId()
++ void setId(Long)
++ String getName()
++ void setName(String)
++ LocalDate getStartDate()
++ void setStartDate(LocalDate)
++ LocalDate getEndDate()
++ void setEndDate(LocalDate)
++ Set<Semester> getSemesters()
++ StudyClass addSemester(Semester)
++ StudyClass removeSemester(Semester)
++ void setSemesters(Set<Semester>)
++ boolean equals(Object)
++ int hashCode()
++ void setStartingYear(long)
++ StudyProgram getStudyProgram()
++ void setStudyProgram(StudyProgram)
++ String toString()
+}
+note left: Studienjahrgang an der Hochschule, zum Beispiel INF2022
+
+class de.digitra.uniplaner.domain.Lecturer {
+- {static} long serialVersionUID
+- Long id
+- String firstName
+- String lastName
+- String email
+- Set<LectureDate> lectureDates
+- Set<Lecture> lectures
+- StudyProgram studyProgram
++ Long getId()
++ void setId(Long)
++ String getFirstName()
++ void setFirstName(String)
++ String getLastName()
++ void setLastName(String)
++ String getEmail()
++ void setEmail(String)
++ Set<LectureDate> getLectureDates()
++ Lecturer addLectureDate(LectureDate)
++ Lecturer removeLectureDate(LectureDate)
++ void setLectureDates(Set<LectureDate>)
++ Set<Lecture> getLectures()
++ Lecturer addLecture(Lecture)
++ Lecturer removeLecture(Lecture)
++ void setLectures(Set<Lecture>)
++ boolean equals(Object)
++ int hashCode()
++ String toString()
++ StudyProgram getStudyProgram()
++ void setStudyProgram(StudyProgram)
+}
+note top: Dozent an der Hochschule
+
+
+
+de.digitra.uniplaner.domain.StudyProgram "1" *-- "*" de.digitra.uniplaner.domain.StudyClass
+de.digitra.uniplaner.domain.StudyProgram "1" *-- "*" de.digitra.uniplaner.domain.Lecture
+de.digitra.uniplaner.domain.StudyProgram "1" *-- "*" de.digitra.uniplaner.domain.Lecturer
+de.digitra.uniplaner.domain.StudyClass "1" *-- "*" de.digitra.uniplaner.domain.Semester
+de.digitra.uniplaner.domain.Semester "1" *-- "*" de.digitra.uniplaner.domain.LectureDate
+de.digitra.uniplaner.domain.Lecturer "*" -- "*" de.digitra.uniplaner.domain.Lecture
+
+@enduml
